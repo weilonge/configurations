@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cat -- | \
+sed -e "s/\(^console.log:.*\)/`tput setaf 2`\1`tput op`/g"  | \
+sed -e "s/\(^console.error:.*\)/`tput setaf 1`\1`tput op`/g" | \
+sed -e "s/\(^[0-9]* INFO TEST-UNEXPECTED-FAIL.*\)/`tput setaf 1`\1`tput op`/g" | \
+sed -e "s/\(^[0-9]* INFO.*\)/`tput setaf 6`\1`tput op`/g" | \
+cat --
+
+

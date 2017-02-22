@@ -1,0 +1,79 @@
+#!/bin/bash
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+   platform='Linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+   platform='Darwin'
+fi
+
+# START: default language
+if [[ $platform == 'Linux' ]]; then
+    export LC_ALL="en_US.UTF-8"
+    export LC_CTYPE="en_US.UTF-8"
+fi
+# END: default language
+
+# START: git-completion
+if [[ $platform == 'Darwin' ]] && [ -f ~/configurations/git/git-completion.bash ]; then
+    . ~/configurations/git/git-completion.bash
+fi
+# END: git-completion
+
+# START: powerline-shell
+function _update_ps1() {
+    PS1="$(~/bin/powerline-shell.py $? 2> /dev/null)"
+}
+if [ "$TERM" != "linux" ]; then
+    PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+fi
+# END: powerline-shell
+
+# START: CUDA
+if [[ $platform == 'Linux' ]]; then
+    export CUDA_HOME=/usr/local/cuda
+    export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:${CUDA_HOME}/lib64:${CUDA_HOME}/extras/CUPTI/lib64"
+    export PATH="$CUDA_HOME/bin:$PATH"
+elif [[ $platform == 'Darwin' ]]; then
+    export CUDA_HOME=/usr/local/cuda
+    export DYLD_LIBRARY_PATH="$DYLD_LIBRARY_PATH:$CUDA_HOME/lib"
+    export PATH="$CUDA_HOME/bin:$PATH"
+fi
+# END: CUDA
+
+# START: rust
+# rust package management
+source ~/.cargo/env
+# END: rust
+
+# START: MozillaFirefox
+export MOZILLA_ROOT=~/Projects/mozilla
+export MOZILLA_SRC_ROOT=${MOZILLA_ROOT}/src/gecko
+export MOZILLA_SRC_ROOT_PREFIX=/gecko/
+export MACH_NOTIFY_MINTIME=10
+source ${MOZILLA_SRC_ROOT}/python/mach/bash-completion.sh
+
+PATH=~/.mozbuild/version-control-tools/git/commands\
+:${MOZILLA_ROOT}/tools/moz-git-tools\
+:${MOZILLA_ROOT}/tools/git-cinnabar\
+:${MOZILLA_ROOT}/tools/build-tooltool\
+:${MOZILLA_ROOT}/tools/git-bz-moz\
+:$PATH
+
+# END: MozillaFirefox
+
+# START: helper
+ga() { grep -rnw ./ -e $1;}
+alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
+alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
+# alias du_cc='du -sh'
+# alias du_sf='du -d1 -h'
+# END: helper
+
+# START: path
+PATH=~/configurations/bin\
+:~/bin\
+:$PATH
+# END: path
+
