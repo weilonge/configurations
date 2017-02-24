@@ -36,7 +36,7 @@ fi
 function _update_ps1() {
     PS1="$(~/bin/powerline-shell.py $? 2> /dev/null)"
 }
-if [ "$TERM" != "linux" ]; then
+if [ -f ~/bin/powerline-shell.py ] && [ "$TERM" != "linux" ]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
 fi
 # END: powerline-shell
@@ -79,7 +79,9 @@ ga() { grep -rnw ./ -e $1;}
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
 # Force tmux to assume the terminal supports 256 colours.
-alias tmux="tmux -2"
+if [[ $platform == 'Linux' ]]; then
+    alias tmux="tmux -2"
+fi
 # alias du_cc='du -sh'
 # alias du_sf='du -d1 -h'
 # END: helper
