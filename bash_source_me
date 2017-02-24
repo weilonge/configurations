@@ -1,11 +1,22 @@
 #!/bin/bash
+# Note 1: Add this line `source ~/configurations/bash_source_me` in
+# ~/.bash_profile (for MacOSX) or ~/.bashrc (for Linux)
+#
+# Note 2: Since MacOSX and Linux use ~/.bashrc and ~/.bash_profile in different
+# ways, add the following lines to ~/.bash_profile to make sure ~/.bashrc is
+# loaded correctly.
+# ```
+# if [ -f ~/.bashrc ]; then
+#     source ~/.bashrc
+# fi
+# ```
 
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
-   platform='Linux'
+    platform='Linux'
 elif [[ "$unamestr" == 'Darwin' ]]; then
-   platform='Darwin'
+    platform='Darwin'
 fi
 
 # START: default language
@@ -67,6 +78,8 @@ PATH=~/.mozbuild/version-control-tools/git/commands\
 ga() { grep -rnw ./ -e $1;}
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
+# Force tmux to assume the terminal supports 256 colours.
+alias tmux="tmux -2"
 # alias du_cc='du -sh'
 # alias du_sf='du -d1 -h'
 # END: helper
@@ -76,4 +89,3 @@ PATH=~/configurations/bin\
 :~/bin\
 :$PATH
 # END: path
-
