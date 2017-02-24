@@ -1,0 +1,91 @@
+#!/bin/bash
+
+function exportLocalMk_tv {
+  echo "# tv
+DEVICE_DEBUG := 1
+FIREFOX_SYNC := 1
+NOFTU := 1
+GAIA_DEVICE_TYPE := tv
+" > local.mk
+}
+
+function exportLocalMk_phone {
+  echo "# phone
+DEVICE_DEBUG := 1
+FIREFOX_SYNC := 1
+NOFTU := 1
+GAIA_DPPX := 1.5
+" > local.mk
+}
+
+B2G=/Applications/B2GDebug.app/Contents/MacOS/b2g
+# B2G=/Applications/B2G.app/Contents/MacOS/b2g-bin
+DEVICE=`head -1 local.mk | awk '{print $2'}`
+
+CMD=$1
+PARA_1=$2
+PARA_2=$3
+
+case "$CMD" in
+"reset" )
+  make reset-gaia
+  ;;
+"install-app" )
+  APP=$PARA_1 make install-gaia
+  ;;
+"clean" )
+  make clean
+  ;;
+"really-clean" )
+  make really-clean
+  ;;
+"install" )
+  make install-gaia
+  ;;
+"workload-light" )
+  APP=communications/contacts make reference-workload-light
+  ;;
+"test" )
+  FIREFOX=/Applications/FirefoxNightly.app/Contents/MacOS/firefox-bin ./bin/gaia-test
+  ;;
+"b2g" )
+  if [ "$DEVICE" == "tv" ];then
+    if [ "$PARA_1" == "full" ];then
+      $B2G -start-debugger-server 6000 -profile `pwd`/profile
+    elif [ "$PARA_1" == "small" ];then
+      $B2G -start-debugger-server 6000 -profile `pwd`/profile -screen 1279x720
+    else
+      # $B2G -start-debugger-server 6000 -profile `pwd`/profile -screen 1920x1080@1.3
+      $B2G -start-debugger-server 6000 -profile `pwd`/profile -screen 1920x1080${PARA_1}
+    fi
+  elif [ "$DEVICE" == "phone" ];then
+    $B2G -start-debugger-server 6000 -profile `pwd`/profile -screen 320x720
+  else
+    $B2G -start-debugger-server 6000 -profile `pwd`/profile
+  fi
+  ;;
+"b2g-tv" )
+  $B2G -start-debugger-server 6000 -profile `pwd`/profile -screen 1920x1080@1.3
+  ;;
+"b2g-phone" )
+  $B2G -start-debugger-server 6000 -profile `pwd`/profile -screen 320x600
+  ;;
+"logcat" )
+  adb logcat | grep -v '[DEIW]/wpa_supplicant\|[DEIW]/Vold\|V/WLAN_PSA\|E/Diag_Lib'
+  ;;
+"mulet" )
+  ./firefox/Contents/MacOS/firefox-bin -start-debugger-server 6000 -profile `pwd`/profile
+  ;;
+"sw" )
+  if [ "$PARA_1" == "tv" ];then
+    exportLocalMk_tv
+  elif [ "$PARA_1" == "phone" ];then
+    exportLocalMk_phone
+  fi
+  ;;
+* )
+  echo "Unknown command"
+  ;;
+esac
+
+
