@@ -27,8 +27,11 @@ fi
 # END: default language
 
 # START: git-completion
-if [[ $platform == 'Darwin' ]] && [ -f ~/configurations/git/git-completion.bash ]; then
-    . ~/configurations/git/git-completion.bash
+# Use homebrew's git completion script here or the script in configurations.git:
+# GIT_COMPLETION_BASH=~/configurations/git/git-completion.bash
+GIT_COMPLETION_BASH=/usr/local/etc/bash_completion.d/git-completion.bash
+if [[ $platform == 'Darwin' ]] && [ -f ${GIT_COMPLETION_BASH} ]; then
+    . ${GIT_COMPLETION_BASH}
 fi
 # END: git-completion
 
