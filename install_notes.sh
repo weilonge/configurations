@@ -3,7 +3,7 @@
 set -e
 
 cd ~
-git clone https://github.com/weilonge/configurations.git 
+git clone https://github.com/weilonge/configurations.git ~/configurations
 git clone https://github.com/weilonge/dotvim.git ~/.vim
 
 ln -s ~/.vim/vimrc ~/.vimrc
