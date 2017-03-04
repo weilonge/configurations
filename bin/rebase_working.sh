@@ -15,7 +15,7 @@ set -e
 
 MASTER=central_default
 TARGET_REMOTE=fx-dev-playground
-WORKING_LIST_FILE=$1
+WORKING_LIST_FILE=.gitworking
 CL_GREEN=`tput setaf 2`
 CL_RED=`tput setaf 1`
 CL_BLUE=`tput setaf 6`
