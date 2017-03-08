@@ -1,0 +1,48 @@
+#!/bin/bash
+
+set -e
+
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  platform='Linux'
+  OBJ_DIR=obj-`uname -m`-pc-linux-gnu
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  platform='Darwin'
+  OBJ_DIR=obj-`uname -m`-apple-darwin`uname -r`
+else
+  echo "[ERROR] Unknown platform."
+  exit 1
+fi
+
+PROFILE_TARBALL_PATH=$HOME/Desktop/nightly_profile.tar.bz2
+
+if [ -d "$OBJ_DIR/tmp/scratch_user" ]; then
+  echo "Generating profile backup now..."
+  if [ -f "$PROFILE_TARBALL_PATH" ]; then
+    mv ${PROFILE_TARBALL_PATH} ${PROFILE_TARBALL_PATH}.backup
+  fi
+  cd $OBJ_DIR/tmp
+  tar cjf ${PROFILE_TARBALL_PATH} ./*
+  cd -
+else
+  echo "[Warning] No profile found."
+fi
+
+printf "Are you sure to apply \"$*\"? (y/N) "
+read ready_to_clobber_build
+
+if [ ${ready_to_clobber_build} == "y" ];then
+  eval $*
+
+  if [ -d "$OBJ_DIR" ]; then
+    mkdir -p $OBJ_DIR/tmp
+  fi 
+fi
+
+if [ -f "$PROFILE_TARBALL_PATH" ]; then
+  echo "Restoring profile..."
+  cd $OBJ_DIR/tmp
+  tar xjf $PROFILE_TARBALL_PATH
+  cd -
+fi
+
