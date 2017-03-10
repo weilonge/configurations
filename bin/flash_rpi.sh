@@ -30,7 +30,7 @@ if [ ${disk_node} == "disk0" ] || [ ${disk_node} == "disk1" ]; then
   echo "[ERROR] Exit for flashing the system disk."
   exit 1
 else
-  if [ ! -f "/dev/${disk_node}" ]; then
+  if [ ! -b "/dev/${disk_node}" ]; then
     echo "[ERROR] Uknown disk node."
     exit 1
   fi
@@ -44,7 +44,7 @@ echo "Start to write ${IMAGE_PATH} to ${disk_node}..."
 diskutil unmountDisk /dev/${disk_node}
 
 
-echo "Note: Use `sudo pkill -INFO -x dd` to check progress"
+echo "Note: Use 'sudo pkill -INFO -x dd' to check progress"
 
 if [ ${write_method} == "direct" ]; then
   sudo dd bs=4m if=${IMAGE_PATH} of=/dev/r${disk_node}
