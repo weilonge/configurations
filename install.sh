@@ -4,6 +4,8 @@ set -e
 
 cd $HOME
 
+mkdir -p ./bin
+
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   platform='Linux'
