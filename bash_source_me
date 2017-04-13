@@ -82,8 +82,9 @@ PATH=~/.mozbuild/version-control-tools/git/commands\
 # END: MozillaFirefox
 
 # START: helper
-ga() { grep -rnw ./ -e $1;}
+ga() { grep -rn ./ -e $1;}
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
+alias kDot_="find . -name \'._*\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
 # Force tmux to assume the terminal supports 256 colours.
 if [[ $platform == 'Linux' ]]; then
