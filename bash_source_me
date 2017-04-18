@@ -82,6 +82,25 @@ PATH=~/.mozbuild/version-control-tools/git/commands\
 # END: MozillaFirefox
 
 # START: helper
+stack() {
+  op=$1
+  name=$2
+  value=$3
+  file=/tmp/bash_stack_$name.$$
+
+  case $op in
+  push)
+    echo $value >> $file
+    ;;
+  pop)
+    if [ -f $file ]; then
+      tail -1 $file
+      sed -i DME -e '$d' $file
+      rm ${file}DME
+    fi
+    ;;
+  esac
+}
 ga() { grep -rn ./ -e $1;}
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kDot_="find . -name \'._*\' -type f -delete"
