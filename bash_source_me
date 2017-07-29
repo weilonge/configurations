@@ -106,7 +106,11 @@ stack() {
   esac
 }
 ga() { grep -rn ./ -e $1;}
-alias td="terminal-notifier -title Terminal -message Done"
+if [[ $platform == 'Linux' ]]; then
+  alias td="notify-send \"Terminal\" \"Something done!!!\""
+elif [[ $platform == 'Darwin' ]]; then
+  alias td="terminal-notifier -title \"Terminal\" -message \"Something done!!!\""
+fi
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kDot_="find . -name \'._*\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
