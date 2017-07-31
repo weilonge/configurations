@@ -9,7 +9,7 @@ mkdir -p ./bin
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   platform='Linux'
-  sudo apt-get install git vim tmux xclip bmon
+  sudo apt-get install git vim tmux xclip bmon bc
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
   brew install reattach-to-user-namespace bmon tmux vim git fpp youtube-dl

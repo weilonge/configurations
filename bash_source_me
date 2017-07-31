@@ -79,10 +79,8 @@ PATH=~/.mozbuild/version-control-tools/git/commands\
 :${MOZILLA_ROOT}/tools/git-bz-moz\
 :$PATH
 
-if [[ $platform == 'Darwin' ]]; then
-  alias freshBuildLocal="caffeinate profile_stack \"./mach clobber && ./mach build -j8\""
-  alias freshBuildIcecc="caffeinate profile_stack \"./mach clobber && ./mach build -j100\""
-fi
+alias fxFreshBuildLocal="profile_stack \"./mach clobber && ./mach build -j8\""
+alias fxFreshBuildIcecc="profile_stack \"./mach clobber && ./mach build -j100\""
 # END: MozillaFirefox
 
 # START: helper
@@ -127,4 +125,8 @@ fi
 PATH=~/configurations/bin\
 :~/bin\
 :$PATH
+
+if [[ $platform == 'Darwin' ]]; then
+  PATH=/usr/local/sbin:$PATH
+fi
 # END: path

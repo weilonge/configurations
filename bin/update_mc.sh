@@ -7,10 +7,12 @@ if [ "$?" != "0" ];then
   exit 1
 fi
 
-BRANCH_LIST="fx-team \
-inbound \
-central \
-"
+# BRANCH_LIST="fx-team \
+# inbound \
+# central \
+# "
+
+BRANCH_LIST="central"
 
 for i in $BRANCH_LIST;do
   echo "==== Let's rebase ${i} ===="
