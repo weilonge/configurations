@@ -79,8 +79,6 @@ PATH=~/.mozbuild/version-control-tools/git/commands\
 :${MOZILLA_ROOT}/tools/git-bz-moz\
 :$PATH
 
-alias fxFreshBuildLocal="profile_stack \"./mach clobber && ./mach build -j8\""
-alias fxFreshBuildIcecc="profile_stack \"./mach clobber && ./mach build -j100\""
 # END: MozillaFirefox
 
 # START: helper

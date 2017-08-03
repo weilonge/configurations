@@ -1,0 +1,4 @@
+#!/bin/bash
+
+profile_stack "./mach clobber && ./mach build -j100"
+
