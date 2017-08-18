@@ -119,6 +119,11 @@ fi
 # alias du_sf='du -d1 -h'
 # END: helper
 
+# START: esp-idf
+PATH=$PATH:$HOME/Projects/esp32_esp-idf/xtensa-esp32-elf/bin
+export IDF_PATH=~/Projects/esp32_esp-idf/esp-idf
+# END: esp-idf
+
 # START: path
 PATH=~/configurations/bin\
 :~/bin\
