@@ -42,13 +42,9 @@ TOOLS_DIR=$HOME/Projects/tools
 mkdir -p ${TOOLS_DIR}
 
 # powerline-shell
-if [ ! -d "${TOOLS_DIR}/powerline-shell" ]; then
-  git clone https://github.com/milkbikis/powerline-shell ${TOOLS_DIR}/powerline-shell
-  cd ${TOOLS_DIR}/powerline-shell
-  # Copy config.py.dist to config.py and edit it to configure the segments
-  # you want. Then run
-  ./install.py
-  ln -s ${TOOLS_DIR}/powerline-shell/powerline-shell.py $HOME/bin/powerline-shell.py
+if [ ! -x "`which powerline-shell`" ]; then
+  pip install powerline-shell
+  cp $CONFIG_DIR/powerline-shell.json $HOME/.powerline-shell.json
 else
   echo "powerline-shell checked."
 fi

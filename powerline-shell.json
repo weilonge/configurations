@@ -1,0 +1,17 @@
+{
+  "segments": [
+    "virtual_env", 
+    "username", 
+    "ssh", 
+    "cwd", 
+    "git", 
+    "hg", 
+    "jobs",
+    "newline",
+    "root"
+  ],
+  "mode": "patched",
+  "backup": [
+    "hostname"
+  ]
+}
