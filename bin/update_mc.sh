@@ -12,7 +12,10 @@ fi
 # central \
 # "
 
-BRANCH_LIST="central"
+BRANCH_LIST="release \
+beta \
+central \
+"
 
 for i in $BRANCH_LIST;do
   echo "==== Let's rebase ${i} ===="
