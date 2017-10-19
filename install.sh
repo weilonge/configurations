@@ -20,9 +20,9 @@ fi
 
 CONFIG_DIR="$HOME/configurations"
 if [ ! -d "$CONFIG_DIR" ]; then
-  git clone https://github.com/weilonge/configurations.git $HOME/configurations
-  ln -s $HOME/configurations/tmux.conf $HOME/.tmux.conf
-  git config --global core.excludesfile $HOME/configurations/git/gitignore_global
+  git clone https://github.com/weilonge/configurations.git $CONFIG_DIR
+  ln -s $CONFIG_DIR/tmux.conf $HOME/.tmux.conf
+  git config --global core.excludesfile $CONFIG_DIR/git/gitignore_global
   # TODO Add source ~/configurations/bash_source_me
   # TODO source ~/.bashrc if needed
 else
@@ -59,6 +59,7 @@ if [ ! -d "${TOOLS_DIR}/powerline-fonts" ]; then
   git clone https://github.com/powerline/fonts.git ${TOOLS_DIR}/powerline-fonts
   cd ${TOOLS_DIR}/powerline-fonts
   ./install.sh
+  cd -
 else
   echo "powerline-fonts checked."
 fi
