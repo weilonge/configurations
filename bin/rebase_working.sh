@@ -61,6 +61,11 @@ while IFS= read -r line; do
   echo "====> Working on branch: ["${CL_GREEN}${branchName}${CL_END}"] <===="
   echo "                Rebasing ["${branchName}"]"
   echo "                based on ["${CL_BLUE}${_currentParent}${CL_END}"] ..."
+  echo "Commit List:"
+  for echoCommitHash in `git log ${_currentParent}..${branchName} --pretty=format:"%H" --no-patch --reverse`; do
+    echo "HASH: "$echoCommitHash
+  done
+  echo "============"
   git rebase $_currentParent $branchName
   git push $TARGET_REMOTE HEAD -f
 done <"$WORKING_LIST_FILE"
