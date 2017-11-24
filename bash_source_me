@@ -103,9 +103,9 @@ stack() {
 }
 ga() { grep -rn ./ -e $1;}
 if [[ $platform == 'Linux' ]]; then
-  alias td="notify-send \"Terminal\" \"Something done!!!\""
+  alias td="notify-send \"Terminal\" \"Something done!!! - ret: [ \$? ]\""
 elif [[ $platform == 'Darwin' ]]; then
-  alias td="terminal-notifier -title \"Terminal\" -message \"Something done!!!\""
+  alias td="terminal-notifier -title \"Terminal\" -message \"Something done!!! - ret: [ \$? ]\""
 fi
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kDot_="find . -name \'._*\' -type f -delete"
