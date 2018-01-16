@@ -12,7 +12,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install git vim tmux xclip bmon bc
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
-  brew install reattach-to-user-namespace bmon tmux vim git fpp youtube-dl
+  brew install reattach-to-user-namespace bmon tmux vim git fpp youtube-dl wget
 else
   echo "[ERROR] Unknown platform."
   exit 1
@@ -62,7 +62,7 @@ fi
 
 # Install NVM
 if [ ! -d "$HOME/.nvm" ]; then
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash
 else
   echo ".nvm checked."
 fi
