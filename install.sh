@@ -12,7 +12,16 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install git vim tmux xclip bmon bc
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
-  brew install reattach-to-user-namespace bmon tmux vim git fpp youtube-dl wget
+  brew install \
+    bmon \
+    fpp \
+    git \
+    reattach-to-user-namespace \
+    terminal-notifier \
+    tmux \
+    vim \
+    wget \
+    youtube-dl
 else
   echo "[ERROR] Unknown platform."
   exit 1
