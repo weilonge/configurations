@@ -120,6 +120,16 @@ fi
 # alias du_sf='du -d1 -h'
 # END: helper
 
+# START: synergy
+if [[ $platform == 'Linux' ]]; then
+  alias synergy-stop="systemctl stop synergy"
+  alias synergy-start="systemctl start synergy"
+elif [[ $platform == 'Darwin' ]]; then
+  alias synergy-stop="launchctl unload /Library/LaunchAgents/com.symless.synergy.synergy-service.plist"
+  alias synergy-start="launchctl load /Library/LaunchAgents/com.symless.synergy.synergy-service.plist"
+fi
+# END: synergy
+
 # START: esp-idf
 PATH=$PATH:$HOME/Projects/esp32_esp-idf/xtensa-esp32-elf/bin
 export IDF_PATH=~/Projects/esp32_esp-idf/esp-idf
