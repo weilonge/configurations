@@ -65,24 +65,6 @@ if [ -f ~/.cargo/env ]; then
 fi
 # END: rust
 
-# START: MozillaFirefox
-export MOZILLA_ROOT=~/Projects/mozilla
-export MOZILLA_SRC_ROOT=${MOZILLA_ROOT}/src/gecko
-export MOZILLA_SRC_ROOT_PREFIX=/gecko/
-export MACH_NOTIFY_MINTIME=10
-if [ -f ${MOZILLA_SRC_ROOT}/python/mach/bash-completion.sh ]; then
-    source ${MOZILLA_SRC_ROOT}/python/mach/bash-completion.sh
-fi
-
-PATH=~/.mozbuild/version-control-tools/git/commands\
-:${MOZILLA_ROOT}/tools/moz-git-tools\
-:${MOZILLA_ROOT}/tools/git-cinnabar\
-:${MOZILLA_ROOT}/tools/build-tooltool\
-:${MOZILLA_ROOT}/tools/git-bz-moz\
-:$PATH
-
-# END: MozillaFirefox
-
 # START: helper
 stack() {
   op=$1
