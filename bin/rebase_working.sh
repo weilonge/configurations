@@ -13,8 +13,9 @@
 
 set -e
 
-MASTER=central_default
-TARGET_REMOTE=fx-dev-playground
+MASTER=develop
+TARGET_REMOTE=origin
+UPSTREAM=upstream
 WORKING_LIST_FILE=.gitworking
 CL_GREEN=`tput setaf 2`
 CL_RED=`tput setaf 1`
@@ -35,9 +36,9 @@ CL_END=`tput op`
 
 # exit
 
-echo "====> Synchronizing m-c from central to ${TARGET_REMOTE} <===="
-git rebase central/default $MASTER
-git push $TARGET_REMOTE HEAD
+echo "====> Synchronizing ${UPSTREAM} to ${TARGET_REMOTE} <===="
+git rebase ${UPSTREAM}/${MASTER} ${MASTER}
+# git push $TARGET_REMOTE HEAD
 echo ""
 
 while IFS= read -r line; do
@@ -67,6 +68,6 @@ while IFS= read -r line; do
   done
   echo "============"
   git rebase $_currentParent $branchName
-  git push $TARGET_REMOTE HEAD -f
+  # git push $TARGET_REMOTE HEAD -f
 done <"$WORKING_LIST_FILE"
 
