@@ -9,19 +9,25 @@ mkdir -p ./bin
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   platform='Linux'
-  sudo apt-get install git vim tmux xclip bmon bc
+  sudo apt-get install \
+    xsel \
+    bc \
+    bmon \
+    git \
+    vim \
+    tmux
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
   brew install \
-    bmon \
     fpp \
-    git \
     reattach-to-user-namespace \
     terminal-notifier \
-    tmux \
-    vim \
     wget \
-    youtube-dl
+    youtube-dl \
+    bmon \
+    git \
+    vim \
+    tmux
 else
   echo "[ERROR] Unknown platform."
   exit 1
