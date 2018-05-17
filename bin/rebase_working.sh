@@ -36,10 +36,10 @@ CL_END=`tput op`
 
 # exit
 
-echo "====> Synchronizing ${UPSTREAM} to ${TARGET_REMOTE} <===="
-git rebase ${UPSTREAM}/${MASTER} ${MASTER}
+# echo "====> Synchronizing ${UPSTREAM} to ${TARGET_REMOTE} <===="
+# git rebase ${UPSTREAM}/${MASTER} ${MASTER}
 # git push $TARGET_REMOTE HEAD
-echo ""
+# echo ""
 
 while IFS= read -r line; do
   set +e
