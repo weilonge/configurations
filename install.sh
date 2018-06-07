@@ -12,6 +12,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install \
     xsel \
     bc \
+    tig \
     bmon \
     git \
     vim \
@@ -24,6 +25,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     terminal-notifier \
     wget \
     youtube-dl \
+    tig \
     bmon \
     git \
     vim \
@@ -49,6 +51,12 @@ if [ ! -d "$HOME/.vim" ]; then
   vim +PlugUpgrade +PlugInstall +qa
 else
   echo ".vim checked."
+fi
+
+if [ -f ~/.tigrc ]; then
+  ln -s $CONFIG_DIR/tig/main.tigrc ~/.tigrc
+else
+  echo ".tigrc checked."
 fi
 
 TOOLS_DIR=$HOME/Projects/tools

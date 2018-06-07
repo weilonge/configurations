@@ -1,0 +1,14 @@
+# tig configurations
+#
+# Installation:
+# $ ln -s ~/configurations/tig/main.tigrc ~/.tigrc
+#
+# The following `tigrc`s are from `tig` repo for checking any updates:
+# https://github.com/jonas/tig/tree/master/contrib
+
+# $ wget https://raw.githubusercontent.com/jonas/tig/master/contrib/vim.tigrc
+source ~/configurations/tig/vim.tigrc
+
+# $ wget https://raw.githubusercontent.com/jonas/tig/master/contrib/chocolate.theme.tigrc
+source ~/configurations/tig/chocolate.theme.tigrc
+
