@@ -38,10 +38,15 @@ fi
 CONFIG_DIR="$HOME/configurations"
 if [ ! -d "$CONFIG_DIR" ]; then
   git clone https://github.com/weilonge/configurations.git $CONFIG_DIR
-  ln -s $CONFIG_DIR/tmux.conf $HOME/.tmux.conf
   git config --global core.excludesfile $CONFIG_DIR/git/gitignore_global
 else
   echo "configurations checked."
+fi
+
+if [ -f ~/.tmux.conf]; then
+  ln -s $CONFIG_DIR/tmux.conf $HOME/.tmux.conf
+else
+  echo ".tmux.conf checked."
 fi
 
 if [ ! -d "$HOME/.vim" ]; then
