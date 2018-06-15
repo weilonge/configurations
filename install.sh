@@ -43,7 +43,7 @@ else
   echo "configurations checked."
 fi
 
-if [ -f ~/.tmux.conf]; then
+if [ ! -f ~/.tmux.conf ]; then
   ln -s $CONFIG_DIR/tmux.conf $HOME/.tmux.conf
 else
   echo ".tmux.conf checked."
@@ -58,7 +58,7 @@ else
   echo ".vim checked."
 fi
 
-if [ -f ~/.tigrc ]; then
+if [ ! -f ~/.tigrc ]; then
   ln -s $CONFIG_DIR/tig/main.tigrc ~/.tigrc
 else
   echo ".tigrc checked."
@@ -74,7 +74,6 @@ if [ ! -x "`which powerline-shell`" ]; then
 else
   echo "powerline-shell checked."
 fi
-
 
 # powerline-fonts
 if [ ! -d "${TOOLS_DIR}/powerline-fonts" ]; then
@@ -95,7 +94,9 @@ fi
 
 if [[ $platform == 'Linux' ]]; then
   if [ ! -x "`grep bash_source_me ~/.bashrc`" ]; then
-    echo 'source ~/configurations/bash_source_me' >> ~/.bashrc
+    echo '
+source ~/configurations/bash_source_me
+' >> ~/.bashrc
   else
     echo "~/.bashrc checked."
   fi
