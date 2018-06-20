@@ -113,6 +113,24 @@ elif [[ $platform == 'Darwin' ]]; then
 fi
 # END: synergy
 
+# START: rtfm
+# Reference:
+# https://www.commandlinefu.com/commands/view/7581/rtfm-function
+rtfm() { help $@ || man $@ || open "http://www.google.com/search?q=$@"; }
+# END: rtfm
+
+# START: weather
+# Reference:
+# https://www.commandlinefu.com/commands/view/17709/nice-weather-forecast-on-your-shell
+weather() { curl -s wttr.in/$1; }
+# END: weather
+
+# START: showWhosUsingNet
+# Reference:
+# https://www.commandlinefu.com/commands/view/3542/show-apps-that-use-internet-connection-at-the-moment.-multi-language
+showWhosUsingNet() { lsof -P -i -n; }
+# END: showWhosUsingNet
+
 # START: esp-idf
 PATH=$PATH:$HOME/Projects/esp32_esp-idf/xtensa-esp32-elf/bin
 export IDF_PATH=~/Projects/esp32_esp-idf/esp-idf
