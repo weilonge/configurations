@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Reference:
+# https://www.commandlinefu.com/commands/view/12318/use-vim-to-convert-text-to-html.
+[[ -f "$1" ]] || return 1
+
+vim +'syn on | run! syntax/2html.vim | wq | q' "$1"
+
