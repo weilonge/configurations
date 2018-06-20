@@ -86,11 +86,25 @@ stack() {
   esac
 }
 ga() { grep -rn ./ -e $1;}
-if [[ $platform == 'Linux' ]]; then
-  alias td="notify-send \"Terminal\" \"Something done!!! - ret: [ \$? ]\""
-elif [[ $platform == 'Darwin' ]]; then
-  alias td="terminal-notifier -title \"Terminal\" -message \"Something done!!! - ret: [ \$? ]\""
-fi
+
+# START: td
+# Use `td` to show a notification in OS. It can be used with `;` to combine it
+# with other commands, e.g. `git remote update; td`
+# Use `tdbg` to show a notification after the background job applied. It can
+# be used with `[ctrl-z]` to put the job in the background and show a
+# notification after it's finished.
+alias td="tnot \$?"
+tdbg() {
+  OUTPUT=`jobs -l | grep '^\[[0-9]*\]+' | sed -n 's/^\[\([0-9]*\)\]+/\1/p'`
+  JOB_ID=`echo ${OUTPUT} | awk '{print $1}'`
+  PID=`echo ${OUTPUT} | awk '{print $2}'`
+
+  fg $JOB_ID
+  wait $PID
+  td
+}
+# END: td
+
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kDot_="find . -name \'._*\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
