@@ -12,6 +12,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install \
     xsel \
     bc \
+    silversearcher-ag \
     tig \
     bmon \
     git \
@@ -25,6 +26,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     terminal-notifier \
     wget \
     youtube-dl \
+    the_silver_searcher \
     tig \
     bmon \
     git \

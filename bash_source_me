@@ -85,7 +85,8 @@ stack() {
     ;;
   esac
 }
-ga() { grep -rn ./ -e $1;}
+mygrepall() { grep -rn ./ -e $1;}
+# END: helper
 
 # START: td
 # Use `td` to show a notification in OS. It can be used with `;` to combine it
