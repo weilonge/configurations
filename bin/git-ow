@@ -28,33 +28,15 @@ cmd_add() {
 # feature4
 #
 cmd_rebase() {
-  MASTER=develop
-  TARGET_REMOTE=origin
-  UPSTREAM=upstream
+  DEFAULT_BRANCH=master
+  REMOTE_ORIGIN=origin
+  REMOTE_UPSTREAM=upstream
   CL_GREEN=`tput setaf 2`
   CL_RED=`tput setaf 1`
   CL_BLUE=`tput setaf 6`
   CL_END=`tput op`
 
-  # echo "Let's fetch all changes..."
-  # git remote update
-
-  # grep "^@" $WORKING_LIST_FILE | while read -r line; do
-  #   CCC=`echo $line | sed 's/^@//'`
-  #   echo "[Config] $CCC"
-  #   eval $CCC
-  # done
-
-  # echo $MASTER
-  # echo $TARGET_REMOTE
-
-  # exit
-
-  # echo "====> Synchronizing ${UPSTREAM} to ${TARGET_REMOTE} <===="
-  # git rebase ${UPSTREAM}/${MASTER} ${MASTER}
-  # git push $TARGET_REMOTE HEAD
-  # echo ""
-
+  # Parse configuration lines
   while IFS= read -r line; do
     set +e
     COMMENT=`echo $line | grep "^#"`
@@ -64,14 +46,33 @@ cmd_rebase() {
     fi
     CONFIG=`echo $line | grep "^@"`
     if [ -n "${CONFIG}" ]; then
-      echo "[Config] "`echo $line | sed 's/^@//'`
+      local config=`echo $line | sed 's/^@//'`
+      echo "[Config] $config"
+      eval "$config"
       continue
     fi
     set -e
+  done <"$WORKING_LIST_FILE"
+
+  # Synchronizing DEFAULT_BRANCH
+  echo "====> Synchronizing ${REMOTE_UPSTREAM} to ${REMOTE_ORIGIN} <===="
+  git rebase ${REMOTE_UPSTREAM}/${DEFAULT_BRANCH} ${DEFAULT_BRANCH}
+  # git push $REMOTE_ORIGIN HEAD
+  echo ""
+
+  while IFS= read -r line; do
+    set +e
+    # Skip the line of comment and config
+    COMMENT=`echo $line | grep "^#"`
+    [ -n "${COMMENT}" ] && continue
+    CONFIG=`echo $line | grep "^@"`
+    [ -n "${CONFIG}" ] && continue
+    set -e
+
     branchName=`echo $line | awk '{print $1}'`
     _currentParent=`echo $line | awk '{print $2}'`
     if [ -z "${_currentParent}" ]; then
-      _currentParent=$MASTER
+      _currentParent=$DEFAULT_BRANCH
     fi
     echo "====> Working on branch: ["${CL_GREEN}${branchName}${CL_END}"] <===="
     echo "                Rebasing ["${branchName}"]"
@@ -82,9 +83,8 @@ cmd_rebase() {
     done
     echo "============"
     git rebase $_currentParent $branchName
-    # git push $TARGET_REMOTE HEAD -f
+    # git push $REMOTE_ORIGIN HEAD -f
   done <"$WORKING_LIST_FILE"
-
 }
 
 main() {
