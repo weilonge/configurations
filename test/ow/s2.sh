@@ -1,13 +1,17 @@
 #!/bin/bash
 
+set -e
+
 cd gitPlayground/
 
-rebase_working.sh
+set +e
+git ow rebase
+set -e
 
 echo "Hello World\! my friends
 Hello there" > README
 git add README
 git rebase --continue
 
-rebase_working.sh
+git ow rebase
 

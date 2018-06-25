@@ -1,7 +1,8 @@
 #!/usr/bin/env sh
 
 set -e
-WORKING_LIST_FILE=.gitow
+ROOT_DIR=`git rev-parse --show-toplevel`
+WORKING_LIST_FILE=${ROOT_DIR}/.gitow
 
 usage() {
   echo "usage: git ow <subcommand>"
@@ -17,7 +18,16 @@ version() {
 }
 
 cmd_add() {
-  echo `git rev-parse --abbrev-ref HEAD` >> $WORKING_LIST_FILE
+  CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
+  echo ${CURRENT_BRANCH} >> $WORKING_LIST_FILE
+}
+
+cmd_list() {
+  cat ${WORKING_LIST_FILE}
+}
+
+cmd_ls() {
+  cmd_list
 }
 
 # Example of WORKING_LIST_FILE:
@@ -55,8 +65,8 @@ cmd_rebase() {
   done <"$WORKING_LIST_FILE"
 
   # Synchronizing DEFAULT_BRANCH
-  echo "====> Synchronizing ${REMOTE_UPSTREAM} to ${REMOTE_ORIGIN} <===="
-  git rebase ${REMOTE_UPSTREAM}/${DEFAULT_BRANCH} ${DEFAULT_BRANCH}
+  # echo "====> Synchronizing ${REMOTE_UPSTREAM} to ${REMOTE_ORIGIN} <===="
+  # git rebase ${REMOTE_UPSTREAM}/${DEFAULT_BRANCH} ${DEFAULT_BRANCH}
   # git push $REMOTE_ORIGIN HEAD
   echo ""
 

@@ -1,10 +1,13 @@
 #!/bin/bash
 
+set -e
+
+rm -rf gitPlayground
 mkdir gitPlayground
 cd gitPlayground/
 
 echo "test_1
-test_2 test_1" > .gitworking
+test_2 test_1" > .gitow
 
 git init
 
