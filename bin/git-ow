@@ -4,12 +4,19 @@ set -e
 ROOT_DIR=`git rev-parse --show-toplevel`
 WORKING_LIST_FILE=${ROOT_DIR}/.gitow
 
+CL_GREEN=`tput setaf 2`
+CL_RED=`tput setaf 1`
+CL_BLUE=`tput setaf 6`
+CL_END=`tput op`
+
 usage() {
   echo "usage: git ow <subcommand>"
   echo
   echo "Available subcommands are:"
   echo "rebase"
   echo "add"
+  echo "list / ls"
+  echo "show"
 }
 
 version() {
@@ -30,6 +37,12 @@ cmd_ls() {
   cmd_list
 }
 
+cmd_show() {
+  for line in `grep ^[^@#] ${WORKING_LIST_FILE} | awk '{print $1}'`; do
+    git show ${line} --no-patch
+  done
+}
+
 # Example of WORKING_LIST_FILE:
 #
 # feature1
@@ -41,10 +54,6 @@ cmd_rebase() {
   DEFAULT_BRANCH=master
   REMOTE_ORIGIN=origin
   REMOTE_UPSTREAM=upstream
-  CL_GREEN=`tput setaf 2`
-  CL_RED=`tput setaf 1`
-  CL_BLUE=`tput setaf 6`
-  CL_END=`tput op`
 
   # Parse configuration lines
   while IFS= read -r line; do
