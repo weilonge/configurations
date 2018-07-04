@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Move com.apple.Bluetooth.plist to Desktop"
+mv /Library/Preferences/com.apple.Bluetooth.plist ~/Desktop/
+
+echo "\"Shutdown\" and wait for 10 secs to apply the settings."
+
