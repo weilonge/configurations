@@ -169,7 +169,16 @@ exec --no-startup-id xset dpms 120
 exec --no-startup-id xautolock -time 2 -locker i3lock
 
 # NaturalScrolling
-exec --no-startup-id synclient NaturalScrolling=1 VertScrollDelta=-113
+exec --no-startup-id synclient \
+VertScrollDelta=-113 \
+VertEdgeScroll=0 \
+VertTwoFingerScroll=1 \
+VertHysteresis=27 \
+HorizScrollDelta=-113 \
+HorizEdgeScroll=0 \
+HorizTwoFingerScroll=1 \
+HorizHysteresis=38 \
+NaturalScrolling=1
 
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 2dB+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute
