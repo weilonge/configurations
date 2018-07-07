@@ -1,0 +1,6 @@
+Installation:
+
+sudo apt install lightdm-gtk-greeter-settings
+
+ln -s ~/configurations/lightdm/lightdm-gtk-greeter.conf /etc/lightdm/lightdm-gtk-greeter.conf
+
