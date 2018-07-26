@@ -116,6 +116,10 @@ if [[ $platform == 'Linux' ]]; then
 fi
 # alias du_cc='du -sh'
 # alias du_sf='du -d1 -h'
+if [[ $platform == 'Linux' ]]; then
+  alias pbcopy="xclip -selection clipboard"
+  alias pbpaste="xclip -selection clipboard -o"
+fi
 # END: helper
 
 # START: synergy
