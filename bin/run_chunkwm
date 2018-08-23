@@ -1,5 +1,5 @@
 #!/bin/bash
 
-chunkwm --config ~/configurations/chunkwmrc
-
+# chunkwm --config ~/configurations/chunkwmrc
+brew services start chunkwm
 
