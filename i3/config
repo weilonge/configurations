@@ -47,6 +47,8 @@ bindsym $mod+d exec dmenu_run
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+workspace_layout tabbed
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
