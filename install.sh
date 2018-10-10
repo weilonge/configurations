@@ -51,6 +51,19 @@ else
   echo ".tmux.conf checked."
 fi
 
+# Install dasht
+# https://github.com/sunaku/dasht
+if [[ "$unamestr" == 'Darwin' ]]; then
+  brew install dasht
+  # dasht-docsets-install "^C$"
+  # dasht-docsets-install "^C\+\+$"
+  # dasht-docsets-install "^Javascript$"
+  # dasht-docsets-install "^CSS$"
+  # dasht-docsets-install "^Bash$"
+  # dasht-docsets-install "^React$"
+  # dasht-docsets-install "^Vim$"
+fi
+
 if [ ! -d "$HOME/.vim" ]; then
   git clone https://github.com/weilonge/dotvim.git $HOME/.vim
   ln -s $HOME/.vim/vimrc $HOME/.vimrc
