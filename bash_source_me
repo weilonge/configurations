@@ -150,6 +150,8 @@ weather() { curl -s wttr.in/$1; }
 showWhosUsingNet() { lsof -P -i -n; }
 # END: showWhosUsingNet
 
+dict() { ydict.js $1 | less -R; }
+
 # START: ytmp3
 # Reference:
 # https://www.commandlinefu.com/commands/view/9701/convert-youtube-videos-to-mp3
