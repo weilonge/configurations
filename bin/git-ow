@@ -17,6 +17,7 @@ usage() {
   echo "add"
   echo "list / ls"
   echo "show"
+  echo "version"
 }
 
 version() {
@@ -24,9 +25,13 @@ version() {
   echo
 }
 
+cmd_version() {
+  version
+}
+
 cmd_add() {
   CURRENT_BRANCH=`git rev-parse --abbrev-ref HEAD`
-  echo ${CURRENT_BRANCH} >> $WORKING_LIST_FILE
+  echo "${CURRENT_BRANCH} $1" >> $WORKING_LIST_FILE
 }
 
 cmd_list() {
@@ -108,7 +113,7 @@ cmd_rebase() {
 
 main() {
   if [ "$#" -lt 1 ]; then
-    usage; exit 1
+    cmd_list; exit 0
   fi
 
   local subcommand="$1"; shift
