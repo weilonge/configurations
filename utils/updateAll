@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  sudo apt update && sudo apt upgrade -y
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  brew upgrade
+fi
+
+npm update -g
+
+vim +PlugUpdate +PlugUpgrade +qa
+
+dasht-docsets-update
+
+set +e
