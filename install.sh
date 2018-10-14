@@ -13,6 +13,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
     xsel \
     bc \
     silversearcher-ag \
+    icdiff \
     tig \
     bmon \
     git \
@@ -27,6 +28,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     wget \
     youtube-dl \
     the_silver_searcher \
+    icdiff \
     tig \
     bmon \
     git \
