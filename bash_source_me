@@ -110,6 +110,7 @@ alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kDot_="find . -name \'._*\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
 alias mydu="du -sch .[!.]* * |sort -h"
+alias yd="ydict.js"
 # Force tmux to assume the terminal supports 256 colours.
 if [[ $platform == 'Linux' ]]; then
     alias tmux="tmux -2"

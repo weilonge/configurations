@@ -109,6 +109,8 @@ else
   echo ".nvm checked."
 fi
 
+# npm install -g ydict.js
+
 if [[ $platform == 'Linux' ]]; then
   if [ ! -x "`grep bash_source_me ~/.bashrc`" ]; then
     echo '
