@@ -12,6 +12,8 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install \
     xsel \
     bc \
+    python-pip \
+    curl \
     silversearcher-ag \
     icdiff \
     tig \
