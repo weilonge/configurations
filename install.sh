@@ -63,6 +63,7 @@ if [[ "$unamestr" == 'Darwin' ]]; then
   # dasht-docsets-install "^C\+\+$"
   # dasht-docsets-install "^Javascript$"
   # dasht-docsets-install "^CSS$"
+  # dasht-docsets-install "^HTML$"
   # dasht-docsets-install "^Bash$"
   # dasht-docsets-install "^React$"
   # dasht-docsets-install "^Vim$"
