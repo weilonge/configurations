@@ -11,6 +11,12 @@ fi
 
 npm update -g
 
+cd ~/.vim && git remote update && git rebase origin/master master && cd -
+
+cd ~/configurations/ && git remote update && git rebase origin/master master && cd -
+
+~/.tmux/plugins/tpm/bin/update_plugins all
+
 vim +PlugUpdate +PlugUpgrade +qa
 
 dasht-docsets-update
