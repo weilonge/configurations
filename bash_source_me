@@ -26,13 +26,24 @@ if [[ $platform == 'Linux' ]]; then
 fi
 # END: default language
 
-# START: git-completion
-# Use homebrew's git completion script here or the script in configurations.git:
+# START: bash-completion
+# Use homebrew's bash completion script:
 if [[ $platform == 'Darwin' ]]; then
-# GIT_COMPLETION_BASH=~/configurations/git/git-completion.bash
   GIT_COMPLETION_BASH=$(brew --prefix)/etc/bash_completion.d/git-completion.bash
   if [ -f ${GIT_COMPLETION_BASH} ]; then
     . ${GIT_COMPLETION_BASH}
+  fi
+  AG_COMPLETION_BASH=$(brew --prefix)/etc/bash_completion.d/ag.bashcomp.sh
+  if [ -f ${AG_COMPLETION_BASH} ]; then
+    . ${AG_COMPLETION_BASH}
+  fi
+  TIG_COMPLETION_BASH=$(brew --prefix)/etc/bash_completion.d/tig-completion.bash
+  if [ -f ${TIG_COMPLETION_BASH} ]; then
+    . ${TIG_COMPLETION_BASH}
+  fi
+  YOUTUBE_DL_COMPLETION_BASH=$(brew --prefix)/etc/bash_completion.d/youtube-dl.bash-completion
+  if [ -f ${YOUTUBE_DL_COMPLETION_BASH} ]; then
+    . ${YOUTUBE_DL_COMPLETION_BASH}
   fi
 fi
 # END: git-completion
