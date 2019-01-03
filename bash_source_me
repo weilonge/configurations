@@ -19,6 +19,27 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     platform='Darwin'
 fi
 
+# START: terminal/ls color
+# Use https://geoff.greer.fm/lscolors/ to convert the format.
+export CLICOLOR=1
+if [[ $platform == 'Linux' ]]; then
+  export LS_COLORS="\
+di=36:\
+ln=35:\
+so=30:\
+pi=33:\
+ex=32:\
+bd=34;46:\
+cd=34;43:\
+su=30;41:\
+sg=30;46:\
+tw=30;42:\
+ow=30;43"
+elif [[ $platform == 'Darwin' ]]; then
+  export LSCOLORS=gxfxaxdxcxegedabagacad
+fi
+# END: terminal/ls color
+
 # START: default language
 if [[ $platform == 'Linux' ]]; then
     export LC_ALL="en_US.UTF-8"
