@@ -19,6 +19,16 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     platform='Darwin'
 fi
 
+# START: path
+PATH=~/configurations/bin\
+:~/bin\
+:$PATH
+
+if [[ $platform == 'Darwin' ]]; then
+  PATH=/usr/local/sbin:$PATH
+fi
+# END: path
+
 # START: terminal/ls color
 # Use https://geoff.greer.fm/lscolors/ to convert the format.
 export CLICOLOR=1
@@ -195,13 +205,3 @@ ytmp3() { youtube-dl -t --extract-audio --audio-format mp3 $@; }
 PATH=$PATH:$HOME/Projects/esp32_esp-idf/xtensa-esp32-elf/bin
 export IDF_PATH=~/Projects/esp32_esp-idf/esp-idf
 # END: esp-idf
-
-# START: path
-PATH=~/configurations/bin\
-:~/bin\
-:$PATH
-
-if [[ $platform == 'Darwin' ]]; then
-  PATH=/usr/local/sbin:$PATH
-fi
-# END: path
