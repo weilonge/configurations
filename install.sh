@@ -15,6 +15,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
     python-pip \
     curl \
     silversearcher-ag \
+    httpie \
     icdiff \
     tig \
     bmon \
@@ -30,6 +31,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     wget \
     youtube-dl \
     the_silver_searcher \
+    httpie \
     icdiff \
     tig \
     bmon \
