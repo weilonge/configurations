@@ -17,6 +17,9 @@ cd ~/configurations/ && git remote update && git rebase origin/master master && 
 
 ~/.tmux/plugins/tpm/bin/update_plugins all
 
+# Upgrade pip packages
+# pip install --upgrade powerline-shell
+
 vim +PlugUpdate +PlugUpgrade +qa
 
 dasht-docsets-update
