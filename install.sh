@@ -8,7 +8,11 @@ mkdir -p ./bin
 
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
-  platform='Linux'
+  if grep -q Microsoft /proc/version; then
+    platform='WSL'
+  else
+    platform='Linux'
+  fi
   sudo apt-get install \
     xsel \
     bc \
@@ -55,6 +59,10 @@ if [ ! -f ~/.tmux.conf ]; then
   ln -s $CONFIG_DIR/tmux.conf $HOME/.tmux.conf
 else
   echo ".tmux.conf checked."
+fi
+
+if [[ $platform == 'WSL' ]]; then
+  sudo ln -s $CONFIG_DIR/wsl/wsl.conf /etc/wsl.conf
 fi
 
 # Install dasht

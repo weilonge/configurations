@@ -14,10 +14,22 @@
 platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
+  if grep -q Microsoft /proc/version; then
+    platform='WSL'
+  else
     platform='Linux'
+  fi
 elif [[ "$unamestr" == 'Darwin' ]]; then
     platform='Darwin'
 fi
+
+# START: WSL
+if [[ $platform == 'WSL' ]]; then
+  if [ "$(umask)" == '0000' ]; then
+    umask 0022
+  fi
+fi
+# END: WSL
 
 # START: path
 PATH=~/configurations/bin\
