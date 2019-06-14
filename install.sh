@@ -6,6 +6,9 @@ cd $HOME
 
 mkdir -p ./bin
 
+TOOLS_DIR=$HOME/Projects/tools
+mkdir -p ${TOOLS_DIR}
+
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   if grep -q Microsoft /proc/version; then
@@ -67,7 +70,9 @@ fi
 # Install dasht
 # https://github.com/sunaku/dasht
 if [[ "$unamestr" == 'Darwin' ]]; then
-  brew install dasht
+  # Use
+  # git clone git@github.com:sunaku/dasht.git ${TOOLS_DIR}/dasht
+  # to install dasht (deprecate: brew install dasht)
   # dasht-docsets-install "^C$"
   # dasht-docsets-install "^C\+\+$"
   # dasht-docsets-install "^Javascript$"
@@ -92,9 +97,6 @@ if [ ! -f ~/.tigrc ]; then
 else
   echo ".tigrc checked."
 fi
-
-TOOLS_DIR=$HOME/Projects/tools
-mkdir -p ${TOOLS_DIR}
 
 # powerline-shell
 if [ ! -x "`which powerline-shell`" ]; then
