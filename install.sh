@@ -9,10 +9,9 @@ mkdir -p ./bin
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   if grep -q Microsoft /proc/version; then
-    platform='WSL'
-  else
-    platform='Linux'
+    subPlatform='WSL'
   fi
+  platform='Linux'
   sudo apt-get install \
     xsel \
     bc \
@@ -61,7 +60,7 @@ else
   echo ".tmux.conf checked."
 fi
 
-if [[ $platform == 'WSL' ]]; then
+if [[ $subPlatform == 'WSL' ]]; then
   sudo ln -s $CONFIG_DIR/wsl/wsl.conf /etc/wsl.conf
 fi
 

@@ -15,16 +15,15 @@ platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   if grep -q Microsoft /proc/version; then
-    platform='WSL'
-  else
-    platform='Linux'
+    subPlatform='WSL'
   fi
+  platform='Linux'
 elif [[ "$unamestr" == 'Darwin' ]]; then
-    platform='Darwin'
+  platform='Darwin'
 fi
 
 # START: WSL
-if [[ $platform == 'WSL' ]]; then
+if [[ $subPlatform == 'WSL' ]]; then
   if [ "$(umask)" == '0000' ]; then
     umask 0022
   fi
