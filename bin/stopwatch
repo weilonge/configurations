@@ -1,28 +1,46 @@
 #!/bin/bash
 
-platform='unknown'
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
-  if grep -q Microsoft /proc/version; then
-    subPlatform='WSL'
-  fi
-  platform='Linux'
+  showTime () {
+    echo -ne " $(date -u --date @$newDate +%H:%M:%S)                   \r"
+  }
 elif [[ "$unamestr" == 'Darwin' ]]; then
-  platform='Darwin'
+  showTime () {
+    echo -ne " $(date -ju -f %s $newDate +%H:%M:%S)                   \r"
+  }
 fi
 
-date1=`date +%s`;
+if [[ $# -eq 0 ]] ; then
+  date1=`date +%s`;
+  updateNewDate () {
+    newDate=$((`date +%s` - $date1))
+  }
+else
+  date1=$((`date +%s` + $1));
+  updateNewDate () {
+    newDate=$(($date1 - `date +%s`))
+  }
+fi
+
 while true; do
+  updateNewDate
+
+  if [[ $newDate -lt 0 ]]; then
+    exit 0
+  fi
+
   days=$((
     $((
-      $(date +%s) - date1
+      $newDate * 1
     )) / 86400
   ))
-
-  if [[ $platform == 'Linux' ]]; then
-    echo -ne "$days day(s) and $(date -u --date @$((`date +%s` - $date1)) +%H:%M:%S)\r";
-  elif [[ $platform == 'Darwin' ]]; then
-    echo -ne "$days day(s) and $(date -ju -f %s $((`date +%s` - $date1)) +%H:%M:%S)\r"
+  if [[ $days -gt 0 ]]; then
+    printf " $days day(s) and"
   fi
+
+  showTime
   sleep 0.1
 done
+
+echo ''
