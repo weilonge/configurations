@@ -15,7 +15,12 @@ if [[ "$unamestr" == 'Linux' ]]; then
     WINHOME=$(cmd.exe /C "cd /D %USERPROFILE% && bash.exe -c pwd")
     $WINHOME/tools/notifu/notifu64.exe /p "${TITLE}" /m "${MESSAGE}" /t "${_t}" &
   else
-    notify-send "${TITLE}" "${MESSAGE}"
+    case ${TYPE} in
+      INFO) _t="dialog-information";;
+      WARN) _t="dialog-warning";;
+      ERROR) _t="dialog-error";;
+    esac
+    notify-send -i "${_t}" "${TITLE}" "${MESSAGE}"
   fi
 elif [[ "$unamestr" == 'Darwin' ]]; then
   terminal-notifier -title "${TITLE}" -message "${MESSAGE}"
