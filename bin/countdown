@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [[ $# -eq 0 ]] ; then
+  exit 0
+fi
+
+platform='unknown'
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  if grep -q Microsoft /proc/version; then
+    subPlatform='WSL'
+  fi
+  platform='Linux'
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  platform='Darwin'
+fi
+
+date1=$((`date +%s` + $1));
+while [ "$date1" -ge `date +%s` ]; do
+  days=$((
+    $((
+      $(( $date1 - $(date +%s))) * 1
+    )) / 86400
+  ))
+
+  if [[ $platform == 'Linux' ]]; then
+    echo -ne "$days day(s) and $(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+  elif [[ $platform == 'Darwin' ]]; then
+    echo -ne "$date day(s) and $(date -ju -f %s $(($date1 - `date +%s`)) +%H:%M:%S)\r"
+  fi
+  sleep 0.1
+done
