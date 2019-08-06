@@ -1,20 +1,16 @@
 #!/bin/bash
 
 RET=$1
+TITLE="Terminal"
 if [[ "$RET" == '0' ]]; then
-  TITLE="Terminal ${RET}"
-  MESSAGE="Something done!!! - ret: [ ${RET} ]"
+  MESSAGE="Something done!!"
+  TYPE="INFO"
 else
-  TITLE="Terminal ${RET}"
-  MESSAGE="Something failed!!! - ret: [ ${RET} ]"
+  MESSAGE="Something wrong? - code: [ ${RET} ]"
+  TYPE="WARN"
 fi
 
-unamestr=`uname`
-if [[ "$unamestr" == 'Linux' ]]; then
-  notify-send "${TITLE}" "${MESSAGE}"
-elif [[ "$unamestr" == 'Darwin' ]]; then
-  terminal-notifier -title "${TITLE}" -message "${MESSAGE}"
-fi
+notifier "${TITLE}" "${MESSAGE}" "${TYPE}"
 
 exit ${RET}
 

@@ -1,0 +1,22 @@
+#!/bin/bash
+
+TITLE=$1
+MESSAGE=$2
+TYPE=$3
+
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  if grep -q Microsoft /proc/version; then
+    case ${TYPE} in
+      INFO) _t="info";;
+      WARN) _t="warn";;
+      ERROR) _t="error";;
+    esac
+    WINHOME=$(cmd.exe /C "cd /D %USERPROFILE% && bash.exe -c pwd")
+    $WINHOME/tools/notifu/notifu64.exe /p "${TITLE}" /m "${MESSAGE}" /t "${_t}" &
+  else
+    notify-send "${TITLE}" "${MESSAGE}"
+  fi
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  terminal-notifier -title "${TITLE}" -message "${MESSAGE}"
+fi
