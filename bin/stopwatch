@@ -3,11 +3,11 @@
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   showTime () {
-    echo -ne " $(date -u --date @$newDate +%H:%M:%S)                   \r"
+    echo -ne "$1 $(date -u --date @$newDate +%H:%M:%S)                   \r"
   }
 elif [[ "$unamestr" == 'Darwin' ]]; then
   showTime () {
-    echo -ne " $(date -ju -f %s $newDate +%H:%M:%S)                   \r"
+    echo -ne "$1 $(date -ju -f %s $newDate +%H:%M:%S)                   \r"
   }
 fi
 
@@ -36,10 +36,10 @@ while true; do
     )) / 86400
   ))
   if [[ $days -gt 0 ]]; then
-    printf " $days day(s) and"
+    showTime " $days day(s) and"
+  else
+    showTime
   fi
-
-  showTime
   sleep 0.1
 done
 
