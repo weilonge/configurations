@@ -70,6 +70,7 @@ fi
 # Install dasht
 # https://github.com/sunaku/dasht
 if [[ "$unamestr" == 'Darwin' ]]; then
+  echo "Skip dasht installation."
   # Use
   # git clone git@github.com:sunaku/dasht.git ${TOOLS_DIR}/dasht
   # to install dasht (deprecate: brew install dasht)
@@ -85,7 +86,6 @@ fi
 
 if [ ! -d "$HOME/.vim" ]; then
   git clone https://github.com/weilonge/dotvim.git $HOME/.vim
-  ln -s $HOME/.vim/vimrc $HOME/.vimrc
   git config --global core.editor vim
   vim +PlugUpgrade +PlugInstall +qa
 else
