@@ -124,6 +124,9 @@ else
 fi
 
 # npm install -g ydict.js
+# npm install -g cambridge-dictionary
+# npm install -g tzloc
+# npm install -g http-server
 
 if [[ $platform == 'Linux' ]]; then
   if [ ! -x "`grep bash_source_me ~/.bashrc`" ]; then
