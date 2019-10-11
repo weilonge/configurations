@@ -224,3 +224,7 @@ export IDF_PATH=~/Projects/esp32_esp-idf/esp-idf
 export PATH=$PATH:~/Projects/tools/dasht/bin
 export MANPATH=~/Projects/tools/dasht/man:$MANPATH
 # END: dasht
+
+# START: devkitpro
+source ~/configurations/dev/devkitpro.sh
+# END: devkitpro
