@@ -40,6 +40,7 @@ PATH=~/configurations/bin\
 
 if [[ $platform == 'Darwin' ]]; then
   PATH=/usr/local/sbin:$PATH
+  PATH=$PATH:~/Library/Python/2.7/bin
 fi
 # END: path
 
