@@ -31,6 +31,8 @@ if [[ "$unamestr" == 'Linux' ]]; then
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
   brew install \
+    ffmpeg \
+    imagemagick \
     fpp \
     reattach-to-user-namespace \
     terminal-notifier \
