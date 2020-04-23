@@ -5,12 +5,12 @@
     "cwd",
     "git",
     "hg",
-    "jobs",
     "newline",
     "root"
   ],
   "mode": "patched",
   "backup": [
+    "jobs",
     "hostname"
   ]
 }
