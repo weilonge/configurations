@@ -10,6 +10,9 @@ else
   TYPE="WARN"
 fi
 
+# Make a beep sound which is a ASCII BEL (\007) character.
+echo -ne '\007'
+
 notifier "${TITLE}" "${MESSAGE}" "${TYPE}"
 
 exit ${RET}
