@@ -245,3 +245,29 @@ movtogif(){
   convert -delay 5 -layers Optimize -loop 0 - "$2"
 }
 # END: movtogif
+
+# START: audiomixer
+# PulseAudio basically sits atop ALSA, and use it internally. ALSA is unable by
+# itself to be used by multiple applications, so PulseAudio provides this
+# functionality among others.
+#
+# Linux Audio System Hierarchy:
+#
+#   [ Application Layer - media players, web browsers, etc.            ]
+#
+#   [ PulseAudio Layer - a software proxy providing additional featues ]
+#   [ (mixing, equalizer) between your application and the ALSA/OSS    ]
+#   [ subsystem.                                                       ]
+#
+#   [ ALSA (driver) - dealing with the hardware, basically owning it.  ]
+#
+#   [ Hardware - Sound hardware and network adapter for other pulse    ]
+#   [ servers or applications listening and broadcasting over RTP.     ]
+#
+# Reference:
+# https://askubuntu.com/questions/581128/what-is-the-relation-between-alsa-and-pulseaudio-sound-architecture
+audiomixer() {
+  # alsamixer is for controlling lower layer.
+  pavucontrol
+}
+# END: audiomixer
