@@ -226,10 +226,6 @@ export PATH=$PATH:~/Projects/tools/dasht/bin
 export MANPATH=~/Projects/tools/dasht/man:$MANPATH
 # END: dasht
 
-# START: devkitpro
-source ~/configurations/dev/devkitpro.sh
-# END: devkitpro
-
 # START: clear-console
 ccc() {
   clear
