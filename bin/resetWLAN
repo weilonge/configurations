@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if ip addr show wlan0 | grep 'inet '; then
+  echo "IP is retrieved"
+else
+  PRODUCT="802.11 bg WLAN"
+  echo "No proper IP... going to reset WIFI..."
+  usbreset "${PRODUCT}"
+  printf "\n[$(date)] Reset USB product: ${PRODUCT}\n" >> /dev/shm/.usb_wifi_log
+fi
