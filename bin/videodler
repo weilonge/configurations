@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Reference:
+# https://superuser.com/questions/1260846/downloading-m3u8-videos
+ffmpeg \
+  -protocol_whitelist file,http,https,tcp,tls,crypto \
+  -i "$1" \
+  -c copy \
+  "$2"
+
