@@ -59,6 +59,8 @@ else
   echo "configurations checked."
 fi
 
+touch ./.lowprofile
+
 if [ ! -f ~/.tmux.conf ]; then
   ln -s $CONFIG_DIR/tmux.conf $HOME/.tmux.conf
 else
@@ -88,6 +90,7 @@ fi
 
 if [ ! -d "$HOME/.vim" ]; then
   git clone https://github.com/weilonge/dotvim.git $HOME/.vim
+  touch $HOME/.vim/.disable_coc
   git config --global core.editor vim
   vim +PlugUpgrade +PlugInstall +qa
 else
