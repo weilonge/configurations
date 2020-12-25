@@ -129,6 +129,7 @@ else
 fi
 
 # npm install -g ydict.js
+# ln -s $CONFIG_DIR/bin/yd $HOME/bin/ydict.js
 # npm install -g cambridge-dictionary
 # npm install -g tzloc
 # npm install -g http-server

@@ -1,0 +1,20 @@
+#!/bin/bash
+
+LOG=~/bin/.yd.log
+YD_BIN=/usr/local/bin/ydict.js
+TEMP_LOG=$(mktemp)
+
+printf "\n::DATE::[$(date)]\n" >> $TEMP_LOG
+echo "::WORD::"$@ >> $TEMP_LOG
+printf "::>>>>:: ====\n" >> $TEMP_LOG
+
+$YD_BIN $@ | tee -a $TEMP_LOG
+YD_RET_CODE=${PIPESTATUS[0]}
+
+printf "::<<<<:: ====\n" >> $TEMP_LOG
+
+if [ $YD_RET_CODE -eq 0 ]; then
+  cat $TEMP_LOG >> $LOG
+fi
+
+exit ${YD_RET_CODE}
