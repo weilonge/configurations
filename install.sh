@@ -145,8 +145,8 @@ source ~/configurations/bash_source_me
 elif [[ $platform == 'Darwin' ]]; then
   if [ ! -x "`grep bash_source_me ~/.bash_profile`" ]; then
     echo '
-source ~/configurations/bash_source_me
 test -f ~/.bashrc && source ~/.bashrc
+source ~/configurations/bash_source_me
 ' >> ~/.bash_profile
   else
     echo "~/.bash_profile checked."
