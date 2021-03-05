@@ -1,0 +1,7 @@
+#!/bin/bash
+
+RECV_IP=$1
+RECV_PORT=$2
+FILE_PATH=$3
+
+tar cv "$FILE_PATH" | nc "$RECV_IP" "$RECV_PORT"

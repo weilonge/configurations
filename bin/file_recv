@@ -1,0 +1,5 @@
+#!/bin/bash
+
+RECV_PORT=$1
+
+nc -l "$RECV_PORT" | tar xv
