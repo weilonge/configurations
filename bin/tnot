@@ -1,7 +1,11 @@
 #!/bin/bash
 
 RET=$1
-TITLE="Terminal"
+if [ -z "$2" ]; then
+  TITLE="Terminal"
+else
+  TITLE=$2
+fi
 if [[ "$RET" == '0' ]]; then
   MESSAGE="Something done!!"
   TYPE="INFO"
