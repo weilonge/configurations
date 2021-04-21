@@ -9,13 +9,19 @@ fi
 if [[ "$RET" == '0' ]]; then
   MESSAGE="Something done!!"
   TYPE="INFO"
+  saySomething="dingdong"
 else
   MESSAGE="Something wrong? - code: [ ${RET} ]"
   TYPE="WARN"
+  saySomething="oh no"
 fi
 
-# Make a beep sound which is a ASCII BEL (\007) character.
-echo -ne '\007'
+if command -v say &> /dev/null; then
+  say ${saySomething} &
+else
+  # Make a beep sound which is a ASCII BEL (\007) character.
+  echo -ne '\007'
+fi
 
 notifier "${TITLE}" "${MESSAGE}" "${TYPE}"
 
