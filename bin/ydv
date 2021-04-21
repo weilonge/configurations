@@ -1,5 +1,7 @@
 #!/bin/bash
 
-say $@ &
+if command -v say &> /dev/null; then
+  say $@ &
+fi
 yd $@
 
