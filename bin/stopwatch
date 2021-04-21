@@ -17,7 +17,8 @@ if [[ $# -eq 0 ]] ; then
     newDate=$((`date +%s` - $date1))
   }
 else
-  date1=$((`date +%s` + $1));
+  value=$(expr "$@")
+  date1=$((`date +%s` + $value));
   updateNewDate () {
     newDate=$(($date1 - `date +%s`))
   }
@@ -27,6 +28,10 @@ while true; do
   updateNewDate
 
   if [[ $newDate -lt 0 ]]; then
+    echo ' 00:00:00'
+    if command -v say &> /dev/null; then
+      say dingdong &
+    fi
     exit 0
   fi
 
@@ -42,5 +47,3 @@ while true; do
   fi
   sleep 0.1
 done
-
-echo ''

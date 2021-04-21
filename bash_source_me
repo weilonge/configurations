@@ -179,6 +179,11 @@ if [[ $platform == 'Linux' ]]; then
 fi
 # END: helper
 
+# START: stopwatch
+alias stopwatch='set -f;_stopwatch_'
+_stopwatch_() { command ~/configurations/bin/stopwatch "$@";set +f; }
+# END: stopwatch
+
 # START: synergy
 if [[ $platform == 'Linux' ]]; then
   alias synergy-stop="systemctl stop synergy"
