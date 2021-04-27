@@ -163,6 +163,7 @@ tdbg() {
 }
 # END: td
 
+# START: alias
 alias kDS_Store="find . -name \'*.DS_Store\' -type f -delete"
 alias kDot_="find . -name \'._*\' -type f -delete"
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
@@ -177,7 +178,8 @@ if [[ $platform == 'Linux' ]]; then
   alias pbcopy="xclip -selection clipboard"
   alias pbpaste="xclip -selection clipboard -o"
 fi
-# END: helper
+alias gl="git log --no-merges --first-parent"
+# END: alias
 
 # START: stopwatch
 alias stopwatch='set -f;_stopwatch_'
