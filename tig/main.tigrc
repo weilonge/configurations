@@ -12,3 +12,5 @@ source ~/configurations/tig/vim.tigrc
 # $ wget https://raw.githubusercontent.com/jonas/tig/master/contrib/chocolate.theme.tigrc
 source ~/configurations/tig/chocolate.theme.tigrc
 
+set main-view-id-display = yes
+set main-view-id-width = 7
