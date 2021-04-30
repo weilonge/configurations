@@ -9,7 +9,9 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   brew upgrade
 fi
 
-npm update -g
+if command -v npm &> /dev/null; then
+  npm update -g
+fi
 
 cd ~/.vim && git remote update && git rebase origin/master master && cd -
 
@@ -22,6 +24,8 @@ cd ~/configurations/ && git remote update && git rebase origin/master master && 
 
 vim +PlugUpdate +PlugUpgrade +qa
 
-dasht-docsets-update
+if command -v dasht-docsets-update &> /dev/null; then
+  dasht-docsets-update
+fi
 
 set +e
