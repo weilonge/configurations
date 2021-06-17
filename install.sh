@@ -20,6 +20,7 @@ if [[ "$unamestr" == 'Linux' ]]; then
     bc \
     python-pip \
     curl \
+    fd-find \
     silversearcher-ag \
     httpie \
     icdiff \
@@ -33,6 +34,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
   brew install \
     ffmpeg \
     imagemagick \
+    fd \
     fpp \
     reattach-to-user-namespace \
     terminal-notifier \

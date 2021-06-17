@@ -145,6 +145,12 @@ stack() {
 mygrepall() { grep -rn ./ -e $1;}
 # END: helper
 
+# START: fzf
+if command -v fd &> /dev/null; then
+  export FZF_DEFAULT_COMMAND="fd --exclude={.git,.idea,.vscode,.sass-cache,node_modules,build,tmp} --type f"
+fi
+# END
+
 # START: td
 # Use `td` to show a notification in OS. It can be used with `;` to combine it
 # with other commands, e.g. `git remote update; td`
