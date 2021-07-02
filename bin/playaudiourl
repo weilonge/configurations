@@ -1,0 +1,24 @@
+#!/bin/bash
+
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  if command -v fd &> /dev/null; then
+    mplayer $1
+  else
+    echo 'mplayer is not found'
+    exit 1
+  fi
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  TMP_FILE=$(mktemp)
+
+  playWithAfplay() {
+    afplay ${TMP_FILE}
+    rm ${TMP_FILE}
+  }
+
+  if curl --fail -o ${TMP_FILE} -s $1; then
+    playWithAfplay &
+  else
+    exit $?
+  fi
+fi
