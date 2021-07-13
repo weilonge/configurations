@@ -1,0 +1,11 @@
+#!/bin/bash
+
+TEST_URL='http://gstatic.com/generate_204'
+status=$(curl -s -o /dev/null -w "%{http_code}" ${TEST_URL})
+if [[ $status == '204' ]]; then
+  echo 'OK'
+  true
+else
+  echo 'No internet'
+  false
+fi
