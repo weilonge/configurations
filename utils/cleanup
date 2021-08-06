@@ -1,0 +1,13 @@
+#!/bin/bash
+
+unamestr=`uname`
+if [[ "$unamestr" == 'Linux' ]]; then
+  # Use `yarn cache dir` to see the exact cache folder.
+  yarn cache clean
+elif [[ "$unamestr" == 'Darwin' ]]; then
+  yarn cache clean
+
+  # clean up Homebrew Cache:
+  # ~/Library/Caches
+  brew cleanup --prune=300
+fi
