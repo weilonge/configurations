@@ -185,6 +185,7 @@ if [[ $platform == 'Linux' ]]; then
   alias pbpaste="xclip -selection clipboard -o"
 fi
 alias gl="git log --no-merges --first-parent"
+alias gltig="tig --no-merges --first-parent"
 # END: alias
 
 # START: stopwatch
