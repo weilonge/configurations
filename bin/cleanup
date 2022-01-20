@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+
+brew cleanup --prune=all
+
+yarn cache clean
+
+
+set +e
