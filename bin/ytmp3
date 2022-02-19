@@ -2,7 +2,7 @@
 
 # Reference:
 # https://www.commandlinefu.com/commands/view/9701/convert-youtube-videos-to-mp3
-youtube-dl \
+yt-dlp \
   -o "%(title)s-%(id)s.%(ext)s" \
   --extract-audio \
   --audio-format mp3 $@

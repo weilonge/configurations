@@ -39,7 +39,6 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     reattach-to-user-namespace \
     terminal-notifier \
     wget \
-    youtube-dl \
     the_silver_searcher \
     httpie \
     icdiff \
@@ -52,6 +51,10 @@ else
   echo "[ERROR] Unknown platform."
   exit 1
 fi
+
+curl \
+  -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp \
+  -o ${HOME}/bin/yt-dlp && chmod a+rx ${HOME}/bin/yt-dlp
 
 CONFIG_DIR="$HOME/configurations"
 if [ ! -d "$CONFIG_DIR" ]; then
