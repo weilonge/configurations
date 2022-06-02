@@ -1,5 +1,21 @@
 #!/usr/bin/env sh
 
+
+### .gitow sample
+#   @DEFAULT_BRANCH=green
+#   @OPEN_PR_PREFIX='https://github.com/gh-user/gh-repo/compare/'
+#   @OPEN_PR_POSTFIX='?expand=1'
+#   @OPEN_FILE_PREFIX='https://github.com/gh-user/gh-repo/tree/master/'
+#
+#   # It's a comment
+#   feature_A_branch
+#
+#   feature_B_branch_part1
+#   feature_B_branch_part2 feature_B_branch_part1
+#   feature_B_branch_part3 feature_B_branch_part2
+#
+#   feature_C_branch
+
 set -e
 ROOT_DIR=`git rev-parse --show-toplevel`
 WORKING_LIST_FILE=${ROOT_DIR}/.gitow
@@ -16,7 +32,9 @@ usage() {
   echo "rebase"
   echo "add"
   echo "list / ls"
-  echo "show"
+  echo "summary"
+  echo "openpr / op"
+  echo "openfile / of"
   echo "version"
 }
 
@@ -39,13 +57,66 @@ cmd_list() {
 }
 
 cmd_ls() {
-  cmd_list
+  cmd_list "$@"
 }
 
-cmd_show() {
+cmd_summary() {
   for line in `grep ^[^@#] ${WORKING_LIST_FILE} | awk '{print $1}'`; do
+    echo "====> ["${CL_GREEN}${line}${CL_END}"] <===="
     git show ${line} --no-patch
+    echo ""
   done
+}
+
+cmd_openfile() {
+  OPEN_FILE_PREFIX=''
+
+  # Parse configuration lines
+  while IFS= read -r line; do
+    set +e
+    CONFIG=`echo $line | grep "^@"`
+    if [ -n "${CONFIG}" ]; then
+      local config=`echo $line | sed 's/^@//'`
+      eval "$config"
+      continue
+    fi
+    set -e
+  done <"$WORKING_LIST_FILE"
+
+  if [ -n "${OPEN_FILE_PREFIX}" ] && [ -n ${fullpath} ]; then
+    local fullpath=`git ls-tree --full-name --name-only HEAD ${1}`
+    open ${OPEN_FILE_PREFIX}${fullpath}
+  fi
+}
+
+cmd_of() {
+  cmd_openfile "$@"
+}
+
+cmd_openpr() {
+  OPEN_PR_PREFIX=''
+  OPEN_PR_POSTFIX=''
+
+  # Parse configuration lines
+  while IFS= read -r line; do
+    set +e
+    CONFIG=`echo $line | grep "^@"`
+    if [ -n "${CONFIG}" ]; then
+      local config=`echo $line | sed 's/^@//'`
+      eval "$config"
+      continue
+    fi
+    set -e
+  done <"$WORKING_LIST_FILE"
+
+  if [ -n "${OPEN_PR_PREFIX}" ] && [ -n ${CURRENT_BRANCH} ]; then
+    CURRENT_BRANCH=`git branch --show-current`
+    open ${OPEN_PR_PREFIX}${CURRENT_BRANCH}${OPEN_PR_POSTFIX}
+  fi
+}
+
+cmd_op() {
+  cmd_openpr "$@"
 }
 
 # Example of WORKING_LIST_FILE:
