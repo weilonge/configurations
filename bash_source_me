@@ -39,7 +39,10 @@ PATH=~/configurations/bin\
 :$PATH
 
 if [[ $platform == 'Darwin' ]]; then
+  # PATH for Homebrew
   PATH=/usr/local/sbin:$PATH
+  PATH=/opt/homebrew/bin:$PATH
+  # PATH for python/python3/pip/pip3
   PATH=$PATH:~/Library/Python/2.7/bin
 fi
 # END: path
@@ -168,6 +171,11 @@ tdbg() {
   td
 }
 # END: td
+
+# START: Bash as default
+# See https://support.apple.com/en-au/HT208050
+export BASH_SILENCE_DEPRECATION_WARNING=1
+# END
 
 # START: alias
 alias kUdFuse="kill `ps aux | grep udFuse | grep -v grep | awk '{print $2}'`"
