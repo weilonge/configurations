@@ -108,6 +108,12 @@ else
   echo ".tigrc checked."
 fi
 
+if [ ! -e ~/.w3m ]; then
+  ln -s $CONFIG_DIR/w3m $HOME/.w3m
+else
+  echo ".w3m checked."
+fi
+
 # powerline-shell
 if [ ! -x "`which powerline-shell`" ]; then
   pip install powerline-shell
