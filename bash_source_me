@@ -262,6 +262,14 @@ movtogif(){
 }
 # END: movtogif
 
+# START: canibuydomain
+# Reference:
+# https://www.commandlinefu.com/commands/view/31767/check-if-a-domain-is-available-for-purchase
+function canibuydomain {
+  whois "$1" 2>/dev/null | grep -q 'Registrant' && echo "taken" || echo "available"
+}
+# END: canibuydomain
+
 # START: audiomixer
 # PulseAudio basically sits atop ALSA, and use it internally. ALSA is unable by
 # itself to be used by multiple applications, so PulseAudio provides this
