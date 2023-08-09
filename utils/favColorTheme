@@ -11,7 +11,11 @@ echo ""
 ./tryColor 000 003
 ./tryColor 004 003
 ./tryColor 023 007
+./tryColor 023 231
+./tryColor 025 011
+./tryColor 054 227
 ./tryColor 090 007
+./tryColor 090 011
 ./tryColor 238 002
 ./tryColor 238 003
 ./tryColor 238 006
