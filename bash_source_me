@@ -197,8 +197,22 @@ alias gltig="tig --no-merges --first-parent"
 kDS_Store() {
   find . -name '*.DS_Store' -type f -delete
 }
+lDS_Store() {
+  find . -name '*.DS_Store' -type f
+}
 kDot_() {
   find . -name '._*' -type f -delete
+}
+lDot_() {
+  find . -name '._*' -type f
+}
+kDD() {
+  kDS_Store
+  kDot_
+}
+lDD() {
+  lDS_Store
+  lDot_
 }
 
 # START: stopwatch
