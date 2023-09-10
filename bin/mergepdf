@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Just install Ghostscript using Brew with command on MacOS/Linux:
+# brew install gs
+# apt install gs
+#
+# Reference: https://apple.stackexchange.com/questions/230437/how-can-i-combine-multiple-pdfs-using-the-command-line
+#
+# Alternatives on MacOS:
+# "/System/Library/Automator/Combine PDF Pages.action/Contents/Resources/join.py" \
+#     -o PATH/TO/YOUR/MERGED/FILE.pdf \
+#     /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf
+#
+# "/System/Library/Automator/Combine PDF Pages.action/Contents/MacOS/join" \
+#     -o PATH/TO/YOUR/MERGED/FILE.pdf \
+#     /PATH/TO/ORIGINAL/1.pdf /PATH/TO/ANOTHER/2.pdf /PATH/TO/A/WHOLE/DIR/*.pdf
+
+gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile="$1" "${@:2}"
