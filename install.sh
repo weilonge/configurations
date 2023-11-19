@@ -18,12 +18,9 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install \
     xsel \
     bc \
-    python-pip \
     curl \
     fd-find \
     silversearcher-ag \
-    httpie \
-    icdiff \
     tig \
     bmon \
     git \
@@ -32,16 +29,12 @@ if [[ "$unamestr" == 'Linux' ]]; then
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
   brew install \
-    ffmpeg \
-    imagemagick \
     fd \
     fpp \
     reattach-to-user-namespace \
     terminal-notifier \
     wget \
     the_silver_searcher \
-    httpie \
-    icdiff \
     tig \
     bmon \
     git \
@@ -76,23 +69,6 @@ if [[ $subPlatform == 'WSL' ]]; then
   sudo ln -s $CONFIG_DIR/wsl/wsl.conf /etc/wsl.conf
 fi
 
-# Install dasht
-# https://github.com/sunaku/dasht
-if [[ "$unamestr" == 'Darwin' ]]; then
-  echo "Skip dasht installation."
-  # Use
-  # git clone git@github.com:sunaku/dasht.git ${TOOLS_DIR}/dasht
-  # to install dasht (deprecate: brew install dasht)
-  # dasht-docsets-install "^C$"
-  # dasht-docsets-install "^C\+\+$"
-  # dasht-docsets-install "^Javascript$"
-  # dasht-docsets-install "^CSS$"
-  # dasht-docsets-install "^HTML$"
-  # dasht-docsets-install "^Bash$"
-  # dasht-docsets-install "^React$"
-  # dasht-docsets-install "^Vim$"
-fi
-
 if [ ! -d "$HOME/.vim" ]; then
   git clone https://github.com/weilonge/dotvim.git $HOME/.vim
   touch $HOME/.vim/.disable_coc
@@ -116,7 +92,7 @@ fi
 
 # powerline-shell
 if [ ! -x "`which powerline-shell`" ]; then
-  pip install powerline-shell
+  pip3 install powerline-shell
   ln -s $CONFIG_DIR/powerline-shell.json $HOME/.powerline-shell.json
 else
   echo "powerline-shell checked."
@@ -138,13 +114,6 @@ if [ ! -d "$HOME/.nvm" ]; then
 else
   echo ".nvm checked."
 fi
-
-# npm install -g ydict.js
-# npm install -g camdict
-# ln -s $CONFIG_DIR/bin/yd $HOME/bin/ydict.js
-# npm install -g cambridge-dictionary
-# npm install -g tzloc
-# npm install -g http-server
 
 if [[ $platform == 'Linux' ]]; then
   if [ ! -x "`grep bash_source_me ~/.bashrc`" ]; then
