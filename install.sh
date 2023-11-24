@@ -33,6 +33,7 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     reattach-to-user-namespace \
     terminal-notifier \
     wget \
+    rectangle \
     the_silver_searcher \
     tig \
     bmon \
