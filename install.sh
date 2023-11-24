@@ -29,7 +29,6 @@ if [[ "$unamestr" == 'Linux' ]]; then
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
   brew install \
-    fd \
     fpp \
     reattach-to-user-namespace \
     terminal-notifier \
@@ -40,6 +39,9 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     git \
     vim \
     tmux
+
+  sh <(curl -L https://nixos.org/nix/install)
+  nix-env --install fd
 else
   echo "[ERROR] Unknown platform."
   exit 1
