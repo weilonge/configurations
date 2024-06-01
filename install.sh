@@ -18,33 +18,28 @@ if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt-get install \
     xsel \
     bc \
-    curl \
-    fd-find \
-    silversearcher-ag \
-    tig \
-    bmon \
-    git \
-    vim \
-    tmux
+    curl
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
   brew install \
-    fd \
-    fpp \
-    reattach-to-user-namespace \
-    terminal-notifier \
-    wget \
-    rectangle \
-    the_silver_searcher \
-    tig \
-    bmon \
-    git \
-    vim \
-    tmux
+    rectangle
 else
   echo "[ERROR] Unknown platform."
   exit 1
 fi
+
+# See: https://github.com/DeterminateSystems/nix-installer
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+nix profile install nixpkgs#fd
+nix profile install nixpkgs#git
+nix profile install nixpkgs#wget
+nix profile install nixpkgs#tig
+nix profile install nixpkgs#bmon
+nix profile install nixpkgs#vim
+nix profile install nixpkgs#silver-searcher
+nix profile install nixpkgs#terminal-notifier
+nix profile install nixpkgs#reattach-to-user-namespace
+nix profile install nixpkgs#tmux
 
 curl \
   -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp \

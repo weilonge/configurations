@@ -25,10 +25,14 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
     imagemagick \
     httpie \
     icdiff
+
+  nix profile install nixpkgs#watch
 else
   echo "[ERROR] Unknown platform."
   exit 1
 fi
+
+nix profile install nixpkgs#aria2
 
 # Install dasht
 # https://github.com/sunaku/dasht
