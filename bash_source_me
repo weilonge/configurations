@@ -91,6 +91,27 @@ if [[ $platform == 'Darwin' ]]; then
     . ${TIG_COMPLETION_BASH}
   fi
 fi
+
+AG_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/ag.bashcomp.sh
+if [ -f ${AG_COMPLETION_BASH_NIX} ]; then
+  . ${AG_COMPLETION_BASH_NIX}
+fi
+ARIA2C_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/aria2c
+if [ -f ${ARIA2C_COMPLETION_BASH_NIX} ]; then
+  . ${ARIA2C_COMPLETION_BASH_NIX}
+fi
+GIT_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/git
+if [ -f ${GIT_COMPLETION_BASH_NIX} ]; then
+  . ${GIT_COMPLETION_BASH_NIX}
+fi
+TIG_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/tig
+if [ -f ${TIG_COMPLETION_BASH_NIX} ]; then
+  . ${TIG_COMPLETION_BASH_NIX}
+fi
+TMUX_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/tmux
+if [ -f ${TMUX_COMPLETION_BASH_NIX} ]; then
+  . ${TMUX_COMPLETION_BASH_NIX}
+fi
 # END: git-completion
 
 # START: powerline-shell
