@@ -231,6 +231,12 @@ lDD() {
   lDS_Store
   lDot_
 }
+kWatchmanCookie() {
+  find . -name '.watchman-cookie*' -type f -delete
+}
+lWatchmanCookie() {
+  find . -name '.watchman-cookie*' -type f
+}
 
 # START: stopwatch
 alias stopwatch='set -f;_stopwatch_'
