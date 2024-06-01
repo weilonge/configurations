@@ -15,35 +15,73 @@ if [[ "$unamestr" == 'Linux' ]]; then
     subPlatform='WSL'
   fi
   platform='Linux'
-  sudo apt-get install \
-    xsel \
-    bc \
-    curl \
-    fd-find \
-    silversearcher-ag \
-    tig \
-    bmon \
-    git \
-    vim \
-    tmux
 elif [[ "$unamestr" == 'Darwin' ]]; then
   platform='Darwin'
-  brew install \
-    fd \
-    fpp \
-    reattach-to-user-namespace \
-    terminal-notifier \
-    wget \
-    rectangle \
-    the_silver_searcher \
-    tig \
-    bmon \
-    git \
-    vim \
-    tmux
 else
   echo "[ERROR] Unknown platform."
   exit 1
+fi
+
+disableNix() {
+  if [[ $platform == 'Linux' ]]; then
+    sudo apt-get install \
+      fd-find \
+      git \
+      tig \
+      bmon \
+      vim \
+      silversearcher-ag \
+      tmux
+  elif [[ "$platform" == 'Darwin' ]]; then
+    brew install \
+      fd \
+      git \
+      tig \
+      bmon \
+      vim \
+      the_silver_searcher \
+      fpp \
+      reattach-to-user-namespace \
+      terminal-notifier \
+      wget \
+      tmux
+  fi
+}
+
+enableNix() {
+  # See: https://github.com/DeterminateSystems/nix-installer
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+  nix profile install 'nixpkgs#fd'
+  nix profile install 'nixpkgs#git'
+  nix profile install 'nixpkgs#wget'
+  nix profile install 'nixpkgs#tig'
+  nix profile install 'nixpkgs#bmon'
+  nix profile install 'nixpkgs#vim'
+  nix profile install 'nixpkgs#silver-searcher'
+  nix profile install 'nixpkgs#terminal-notifier'
+  nix profile install 'nixpkgs#reattach-to-user-namespace'
+  nix profile install 'nixpkgs#tmux'
+}
+
+NIX_PROMPT_NO='No, I would like going with brew/apt way'
+NIX_PROMPT_YES='Yes, please enable nix support'
+
+echo "Do you wish to install dependencies via nix?"
+select yn in "$NIX_PROMPT_NO" "$NIX_PROMPT_YES"; do
+  case $yn in
+    "$NIX_PROMPT_NO" ) disableNix; break;;
+    "$NIX_PROMPT_YES" ) enableNix; break;;
+  esac
+done
+
+if [[ $platform == 'Linux' ]]; then
+  sudo apt-get install \
+    xsel \
+    bc \
+    curl
+elif [[ "$platform" == 'Darwin' ]]; then
+  brew install \
+    rectangle
 fi
 
 curl \

@@ -30,6 +30,10 @@ else
   exit 1
 fi
 
+
+# nix profile install nixpkgs#watch
+# nix profile install nixpkgs#aria2
+
 # Install dasht
 # https://github.com/sunaku/dasht
 if [[ "$unamestr" == 'Darwin' ]]; then
