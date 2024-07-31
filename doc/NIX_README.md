@@ -24,5 +24,6 @@ Run `curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems
   - `nix profile rollback`
 - Clean up store
   - `nix-store --gc`
+  - `nix-collect-garbage --delete-old`
 - Check nix disk usage
   - `df -h /nix`
