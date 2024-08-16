@@ -6,7 +6,9 @@ unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   sudo apt update && sudo apt upgrade -y
 elif [[ "$unamestr" == 'Darwin' ]]; then
-  brew upgrade
+  if [ -x "`which brew`" ]; then
+    brew upgrade
+  fi
 fi
 
 if command -v npm &> /dev/null; then
