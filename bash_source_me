@@ -77,7 +77,7 @@ fi
 
 # START: bash-completion
 # Use homebrew's bash completion script:
-if [[ $platform == 'Darwin' ]]; then
+if [ -x "`which brew`" ]; then
   GIT_COMPLETION_BASH=$(brew --prefix)/etc/bash_completion.d/git-completion.bash
   if [ -f ${GIT_COMPLETION_BASH} ]; then
     . ${GIT_COMPLETION_BASH}
@@ -100,13 +100,15 @@ ARIA2C_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/aria
 if [ -f ${ARIA2C_COMPLETION_BASH_NIX} ]; then
   . ${ARIA2C_COMPLETION_BASH_NIX}
 fi
-GIT_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/git
-if [ -f ${GIT_COMPLETION_BASH_NIX} ]; then
-  . ${GIT_COMPLETION_BASH_NIX}
-fi
-TIG_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/tig
-if [ -f ${TIG_COMPLETION_BASH_NIX} ]; then
-  . ${TIG_COMPLETION_BASH_NIX}
+if [[ $SHELL == */bash ]]; then
+  GIT_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/git
+  if [ -f ${GIT_COMPLETION_BASH_NIX} ]; then
+    . ${GIT_COMPLETION_BASH_NIX}
+  fi
+  TIG_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/tig
+  if [ -f ${TIG_COMPLETION_BASH_NIX} ]; then
+    . ${TIG_COMPLETION_BASH_NIX}
+  fi
 fi
 TMUX_COMPLETION_BASH_NIX=~/.nix-profile/share/bash-completion/completions/tmux
 if [ -f ${TMUX_COMPLETION_BASH_NIX} ]; then
@@ -114,14 +116,37 @@ if [ -f ${TMUX_COMPLETION_BASH_NIX} ]; then
 fi
 # END: git-completion
 
-# START: powerline-shell
-function _update_ps1() {
+# START: powerline-shell for bash
+if [[ $SHELL == */bash ]]; then
+  function _update_ps1() {
     PS1=$(powerline-shell $?)
-}
-if [[ -x "`which powerline-shell`" && $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
+  }
+  if [[ -x "`which powerline-shell`" && $TERM != linux && ! $PROMPT_COMMAND =~ _update_ps1 ]]; then
     PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
+  fi
 fi
-# END: powerline-shell
+# END: powerline-shell for bash
+
+# START: powerline-shell for zsh
+if [[ $SHELL == */zsh ]]; then
+  function powerline_precmd() {
+    PS1="$(powerline-shell --shell zsh $?)"
+  }
+
+  function install_powerline_precmd() {
+    for s in "${precmd_functions[@]}"; do
+      if [ "$s" = "powerline_precmd" ]; then
+        return
+      fi
+    done
+    precmd_functions+=(powerline_precmd)
+  }
+
+  if [ "$TERM" != "linux" -a -x "$(command -v powerline-shell)" ]; then
+    install_powerline_precmd
+  fi
+fi
+# END: powerline-shell for zsh
 
 # START: CUDA
 if [[ $platform == 'Linux' ]]; then
