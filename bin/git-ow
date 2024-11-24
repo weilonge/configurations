@@ -136,13 +136,13 @@ cmd_rebase() {
     set +e
     COMMENT=`echo $line | grep "^#"`
     if [ -n "${COMMENT}" ]; then
-      echo "$line"
+      # echo "$line"
       continue
     fi
     CONFIG=`echo $line | grep "^@"`
     if [ -n "${CONFIG}" ]; then
       local config=`echo $line | sed 's/^@//'`
-      echo "[Config] $config"
+      # echo "[Config] $config"
       eval "$config"
       continue
     fi
@@ -157,6 +157,14 @@ cmd_rebase() {
 
   while IFS= read -r line; do
     set +e
+    # Trim leading and trailing whitespace
+    TRIMMED_LINE=`echo "$line" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'`
+
+    # Skip empty lines (after trimming spaces)
+    if [ -z "$TRIMMED_LINE" ]; then
+      continue
+    fi
+
     # Skip the line of comment and config
     COMMENT=`echo $line | grep "^#"`
     [ -n "${COMMENT}" ] && continue
