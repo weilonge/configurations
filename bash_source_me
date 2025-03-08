@@ -127,6 +127,13 @@ if [[ $SHELL == */bash ]]; then
 fi
 # END: powerline-shell for bash
 
+# START: bash auto-complete simulation for zsh
+if [[ $SHELL == */zsh ]]; then
+  setopt complete_in_word
+  bindkey '^I' expand-or-complete-prefix
+fi
+# END: bash auto-complete simulation for zsh
+
 # START: powerline-shell for zsh
 if [[ $SHELL == */zsh ]]; then
   function powerline_precmd() {
