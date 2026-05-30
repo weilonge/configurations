@@ -1,0 +1,10 @@
+# /etc/systemd/system/healthcheck.service
+[Unit]
+Description=Health check HTTP server
+
+[Service]
+ExecStart=/home/ubuntu/configurations/utils/healthcheck
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
