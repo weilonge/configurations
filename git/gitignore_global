@@ -10,3 +10,6 @@
 **/.projections.json
 **/.vim
 
+opencode.json
+opencode.jsonc
+
