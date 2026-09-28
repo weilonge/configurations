@@ -1,7 +1,6 @@
 #!/bin/bash
 
-RECV_IP=$1
-RECV_PORT=$2
-FILE_PATH=$3
-
-tar cv "$FILE_PATH" | nc "$RECV_IP" "$RECV_PORT"
+# file_send: IP PORT PATH
+set -euo pipefail
+: "${3:?usage: file_send IP PORT PATH}"
+tar c -C "$(dirname "$3")" "$(basename "$3")" | pv | nc "$1" "$2"

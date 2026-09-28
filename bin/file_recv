@@ -1,5 +1,6 @@
 #!/bin/bash
 
-RECV_PORT=$1
-
-nc -l "$RECV_PORT" | tar xv
+# file_recv: PORT
+set -euo pipefail
+: "${1:?usage: file_recv PORT}"
+nc -l "$1" | pv | tar x
