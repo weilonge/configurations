@@ -129,14 +129,6 @@ else
   echo ".w3m checked."
 fi
 
-# powerline-shell
-if [ ! -x "`which powerline-shell`" ]; then
-  pip3 install powerline-shell
-  ln -s $CONFIG_DIR/powerline-shell.json $HOME/.powerline-shell.json
-else
-  echo "powerline-shell checked."
-fi
-
 # powerline-fonts
 if [ ! -d "${TOOLS_DIR}/powerline-fonts" ]; then
   git clone https://github.com/powerline/fonts.git ${TOOLS_DIR}/powerline-fonts --depth=1
@@ -149,7 +141,7 @@ fi
 
 # Install NVM
 if [ ! -d "$HOME/.nvm" ]; then
-  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.8/install.sh | bash
 else
   echo ".nvm checked."
 fi
