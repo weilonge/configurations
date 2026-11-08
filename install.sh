@@ -66,13 +66,24 @@ enableNix() {
 NIX_PROMPT_NO='No, I would like going with brew/apt way'
 NIX_PROMPT_YES='Yes, please enable nix support'
 
+choose_nix() {
+  select yn in "$NIX_PROMPT_NO" "$NIX_PROMPT_YES"; do
+    case $yn in
+      "$NIX_PROMPT_NO" ) disableNix; break;;
+      "$NIX_PROMPT_YES" ) enableNix; break;;
+    esac
+  done
+}
+
 echo "Do you wish to install dependencies via nix?"
-select yn in "$NIX_PROMPT_NO" "$NIX_PROMPT_YES"; do
-  case $yn in
-    "$NIX_PROMPT_NO" ) disableNix; break;;
-    "$NIX_PROMPT_YES" ) enableNix; break;;
-  esac
-done
+if [ -t 0 ]; then
+  choose_nix
+elif (exec </dev/tty) 2>/dev/null; then
+  choose_nix < /dev/tty
+else
+  echo "No interactive terminal detected; installing dependencies via brew/apt."
+  disableNix
+fi
 
 if [[ $platform == 'Linux' ]]; then
   sudo apt-get install \
