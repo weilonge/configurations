@@ -147,7 +147,7 @@ else
 fi
 
 if [[ $platform == 'Linux' ]]; then
-  if [ ! -x "`grep bash_source_me ~/.bashrc`" ]; then
+  if ! grep -qF 'configurations/bash_source_me' ~/.bashrc 2>/dev/null; then
     echo '
 source ~/configurations/bash_source_me
 ' >> ~/.bashrc
@@ -155,9 +155,13 @@ source ~/configurations/bash_source_me
     echo "~/.bashrc checked."
   fi
 elif [[ $platform == 'Darwin' ]]; then
-  if [ ! -x "`grep bash_source_me ~/.bash_profile`" ]; then
-    echo '
+  if ! grep -qF 'configurations/bash_source_me' ~/.bash_profile 2>/dev/null; then
+    if ! grep -qF 'test -f ~/.bashrc && source ~/.bashrc' ~/.bash_profile 2>/dev/null; then
+      echo '
 test -f ~/.bashrc && source ~/.bashrc
+' >> ~/.bash_profile
+    fi
+    echo '
 source ~/configurations/bash_source_me
 ' >> ~/.bash_profile
   else
