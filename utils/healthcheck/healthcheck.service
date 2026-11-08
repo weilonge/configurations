@@ -3,7 +3,8 @@
 Description=Health check HTTP server
 
 [Service]
-ExecStart=/home/ubuntu/configurations/utils/healthcheck
+ExecStart=/home/ubuntu/configurations/utils/healthcheck/healthcheck.sh
+User=ubuntu
 Restart=always
 
 [Install]
