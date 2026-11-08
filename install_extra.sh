@@ -9,6 +9,8 @@ mkdir -p ./bin
 TOOLS_DIR=$HOME/Projects/tools
 mkdir -p ${TOOLS_DIR}
 
+CONFIG_DIR="$HOME/configurations"
+
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
   if grep -q Microsoft /proc/version; then
@@ -53,7 +55,7 @@ fi
 
 npm install -g ydict.js
 npm install -g camdict
-ln -s $CONFIG_DIR/bin/yd $HOME/bin/ydict.js
+ln -sfn "$CONFIG_DIR/bin/yd" "$HOME/bin/ydict.js"
 npm install -g cambridge-dictionary
 npm install -g tzloc
 npm install -g http-server
