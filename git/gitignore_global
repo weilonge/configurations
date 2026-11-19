@@ -10,4 +10,5 @@
 **/.projections.json
 **/.vim
 
+node_modules/
 .tmp/
